@@ -102,18 +102,23 @@ const manifest = {
     "deco-sites/oticas-prevent/sections/Layout/GridItem.tsx": $$$$$$32,
     "deco-sites/oticas-prevent/sections/Links/LinkTree.tsx": $$$$$$33,
     "deco-sites/oticas-prevent/sections/Links/Shortcuts.tsx": $$$$$$34,
-    "deco-sites/oticas-prevent/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$35,
-    "deco-sites/oticas-prevent/sections/Miscellaneous/CookieConsent.tsx": $$$$$$36,
+    "deco-sites/oticas-prevent/sections/Miscellaneous/CampaignTimer.tsx":
+      $$$$$$35,
+    "deco-sites/oticas-prevent/sections/Miscellaneous/CookieConsent.tsx":
+      $$$$$$36,
     "deco-sites/oticas-prevent/sections/Miscellaneous/Slide.tsx": $$$$$$37,
     "deco-sites/oticas-prevent/sections/Newsletter/Newsletter.tsx": $$$$$$38,
     "deco-sites/oticas-prevent/sections/Product/ImageGalleryFrontBack.tsx":
       $$$$$$39,
-    "deco-sites/oticas-prevent/sections/Product/ImageGallerySlider.tsx": $$$$$$40,
+    "deco-sites/oticas-prevent/sections/Product/ImageGallerySlider.tsx":
+      $$$$$$40,
     "deco-sites/oticas-prevent/sections/Product/NotFound.tsx": $$$$$$41,
-    "deco-sites/oticas-prevent/sections/Product/NotFoundChallenge.tsx": $$$$$$42,
+    "deco-sites/oticas-prevent/sections/Product/NotFoundChallenge.tsx":
+      $$$$$$42,
     "deco-sites/oticas-prevent/sections/Product/ProductInfo.tsx": $$$$$$43,
     "deco-sites/oticas-prevent/sections/Product/ProductShelf.tsx": $$$$$$44,
-    "deco-sites/oticas-prevent/sections/Product/ProductShelfTabbed.tsx": $$$$$$45,
+    "deco-sites/oticas-prevent/sections/Product/ProductShelfTabbed.tsx":
+      $$$$$$45,
     "deco-sites/oticas-prevent/sections/Product/SearchResult.tsx": $$$$$$46,
     "deco-sites/oticas-prevent/sections/Product/ShelfWithImage.tsx": $$$$$$47,
     "deco-sites/oticas-prevent/sections/Product/Wishlist.tsx": $$$$$$48,

@@ -9,7 +9,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
   return (
     <li class="group flex items-center">
       <a href={url} class="py-6">
-        <span class="group-hover:underline text-xs font-thin">
+        <span class="group-hover:underline text-base uppercase">
           {name}
         </span>
       </a>
@@ -41,7 +41,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
                     {node.children?.map((leaf) => (
                       <li>
                         <a class="hover:underline" href={leaf.url}>
-                          <span class="text-xs">{leaf.name}</span>
+                          <span class="text-base">{leaf.name}</span>
                         </a>
                       </li>
                     ))}

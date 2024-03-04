@@ -52,11 +52,17 @@ function Newsletter(
     >
       <div class="flex flex-col gap-4">
         {content?.title && (
-          <h4 class={tiled ? "text-2xl lg:text-3xl" : "text-lg"}>
+          <h4
+            class={tiled
+              ? "text-2xl lg:text-3xl text-white"
+              : "text-lg text-white"}
+          >
             {content?.title}
           </h4>
         )}
-        {content?.description && <div>{content?.description}</div>}
+        {content?.description && (
+          <div class="text-white">{content?.description}</div>
+        )}
       </div>
       <div class="flex flex-col gap-4">
         <form
@@ -80,7 +86,7 @@ function Newsletter(
         </form>
         {content?.form?.helpText && (
           <div
-            class="text-sm"
+            class="text-sm text-white"
             dangerouslySetInnerHTML={{ __html: content?.form?.helpText }}
           />
         )}

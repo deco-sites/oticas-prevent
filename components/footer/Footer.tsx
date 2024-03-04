@@ -223,8 +223,8 @@ function Footer({
   return (
     <footer
       class={clx(
-        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10",
-        LAYOUT[layout?.backgroundColor ?? "Primary"],
+        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 bg-[#5f9b9a]", /*,
+        LAYOUT[layout?.backgroundColor ?? "Primary"],*/
       )}
     >
       <div class="lg:container mx-6 lg:mx-auto">
@@ -321,7 +321,7 @@ function Footer({
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
+            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center text-white">
               {_logo}
               <PoweredByDeco />
             </div>
