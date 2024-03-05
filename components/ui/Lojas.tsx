@@ -37,7 +37,7 @@ export default function Lojas({
   const ladoimg = lado === true ? "direito" : "esquerdo";
   return (
     <div class={`loja grid grid-cols-1 lg:grid-cols-2 ${ladoimg}`}>
-      <div class="col-img">
+      <div class={`col-img ${lado === true ? "lg:order-2 md:order-1":""}`}>
         <img
           loading="lazy"
           src={imagem?.Imagem}
@@ -48,7 +48,7 @@ export default function Lojas({
       <div class="flex content-center justify-center flex-wrap">
         <div class="lg:w-1/2 py-4">
           {tituloloja && (
-            <h2 class="font-semibold mb-4 text-xl lg:text-4xl text-secondary w-full">
+            <h2 class="font-semibold mb-4 text-xl lg:text-4xl text-[#5f9b9a] w-full">
               {tituloloja}
             </h2>
           )}
