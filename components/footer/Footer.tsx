@@ -267,7 +267,7 @@ function Footer({
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 text-white">
               <PoweredByDeco />
               {_links}
             </div>
