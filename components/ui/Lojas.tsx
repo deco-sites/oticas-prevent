@@ -3,6 +3,9 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 export interface Props {
   imagem?: {
     Imagem: ImageWidget;
+    ImagemDois: ImageWidget;
+    ImagemTres: ImageWidget;
+    ImagemQuatro: ImageWidget;
     Alt?: string;
   };
   /**
@@ -37,12 +40,34 @@ export default function Lojas({
   const ladoimg = lado === true ? "direito" : "esquerdo";
   return (
     <div class={`loja grid grid-cols-1 lg:grid-cols-2 ${ladoimg}`}>
-      <div class={`col-img ${lado === true ? "lg:order-2 md:order-1":""}`}>
-        <img
-          loading="lazy"
-          src={imagem?.Imagem}
-          alt={imagem?.Alt}
-          class="w-full"
+      <div class={`col-img grid grid-cols-2 ${lado === true ? "lg:order-2 md:order-1":""}`}>
+        <Image
+          class="min-w-full h-auto"
+          src={imagem.Imagem}
+          alt={imagem.Alt}
+          height={270}
+          width={400}
+        />
+        <Image
+          class="min-w-full h-auto "
+          src={imagem.ImagemDois} 
+          alt={imagem.Alt}
+          width={400}
+          height={270}
+        />
+        <Image
+          class="min-w-full h-auto"
+          src={imagem.ImagemTres}
+          alt={imagem.Alt}
+          width={400}
+          height={270}
+        />
+        <Image
+          class="min-w-full h-auto"
+          src={imagem.ImagemQuatro}
+          alt={imagem.Alt}
+          width={400}
+          height={270}
         />
       </div>
       <div class="flex content-center justify-center flex-wrap">
