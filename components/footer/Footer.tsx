@@ -223,7 +223,7 @@ function Footer({
   return (
     <footer
       class={clx(
-        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 bg-[#5f9b9a]", /*,
+        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 bg-secondary", /*,
         LAYOUT[layout?.backgroundColor ?? "Primary"],*/
       )}
     >
@@ -268,7 +268,13 @@ function Footer({
             </div>
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 text-white">
-              <PoweredByDeco />
+              <div class="flex  gap-10">
+                <PoweredByDeco />
+
+                <a href="https://agenciafg.com.br/" target="_blank" rel="noopener noreferrer">
+                  
+                </a>
+              </div>
               {_links}
             </div>
           </div>
