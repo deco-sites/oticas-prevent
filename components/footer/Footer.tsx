@@ -10,6 +10,7 @@ import Social from "$store/components/footer/Social.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Agencia from "$store/components/footer/Agencia.tsx";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 
 export type Item = {
@@ -79,6 +80,7 @@ export interface Layout {
     regionOptions?: boolean;
     extraLinks?: boolean;
     backToTheTop?: boolean;
+    agencia?: boolean;
   };
 }
 
@@ -107,6 +109,11 @@ export interface Props {
   extraLinks?: Item[];
   backToTheTop?: {
     text?: string;
+  };
+  agencia?: {
+    image: ImageWidget;
+    link?: string;
+    alt?: string;
   };
   layout?: Layout;
 }
@@ -171,6 +178,7 @@ function Footer({
   regionOptions = { currency: [], language: [] },
   extraLinks = [],
   backToTheTop,
+  agencia,
   layout = {
     backgroundColor: "Primary",
     variation: "Variation 1",
@@ -184,6 +192,7 @@ function Footer({
       regionOptions: false,
       extraLinks: false,
       backToTheTop: false,
+      agencia: false,
     },
   },
 }: Props) {
@@ -219,6 +228,9 @@ function Footer({
   const _links = layout?.hide?.extraLinks
     ? <></>
     : <ExtraLinks content={extraLinks} />;
+  const _agencia = layout?.hide?.agencia
+    ? <></>
+    : <Agencia agencia={agencia} />;
 
   return (
     <footer
@@ -271,9 +283,7 @@ function Footer({
               <div class="flex  gap-10">
                 <PoweredByDeco />
 
-                <a href="https://agenciafg.com.br/" target="_blank" rel="noopener noreferrer">
-                  
-                </a>
+                {_agencia}
               </div>
               {_links}
             </div>
