@@ -48,28 +48,28 @@ export default function Lojas({
       >
         <Image
           class="min-w-full h-auto"
-          src={imagem?.Imagem}
+          src={imagem?.Imagem !== undefined ? imagem?.Imagem : ""}
           alt={imagem?.Alt}
           height={270}
           width={400}
         />
         <Image
           class="min-w-full h-auto "
-          src={imagem?.ImagemDois}
+          src={imagem?.ImagemDois !== undefined ? imagem?.ImagemDois : ""}
           alt={imagem?.Alt}
           width={400}
           height={270}
         />
         <Image
           class="min-w-full h-auto"
-          src={imagem?.ImagemTres}
+          src={imagem?.ImagemTres !== undefined ? imagem?.ImagemTres : ""}
           alt={imagem?.Alt}
           width={400}
           height={270}
         />
         <Image
           class="min-w-full h-auto"
-          src={imagem?.ImagemQuatro}
+          src={imagem?.ImagemQuatro !== undefined ? imagem?.ImagemQuatro : ""}
           alt={imagem?.Alt}
           width={400}
           height={270}
