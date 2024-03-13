@@ -143,20 +143,20 @@ function Banner(
     >
       <Picture>
         <Source
-          width={190}
-          height={190}
+          width={0}
+          height={0}
           media="(max-width: 767px)"
           src={srcMobile}
         />
         <Source
-          width={640}
-          height={420}
+          width={0}
+          height={0}
           media="(min-width: 768px)"
           src={srcDesktop || srcMobile}
         />
         <img
           width={640}
-          class="w-full h-full object-cover"
+          class="w-full h-full"
           src={srcMobile}
           alt={alt}
           decoding="async"
