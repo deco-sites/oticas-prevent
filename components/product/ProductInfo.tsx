@@ -18,7 +18,6 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
 
-
 interface Props {
   page: ProductDetailsPage | null;
   layout: {
@@ -29,10 +28,9 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
- 
 }
 
-function ProductInfo({ page, layout}: Props) {
+function ProductInfo({ page, layout }: Props) {
   const platform = usePlatform();
   const id = useId();
   if (page === null) {
@@ -209,8 +207,6 @@ function ProductInfo({ page, layout}: Props) {
           },
         }}
       />
-
-
     </div>
   );
 }
