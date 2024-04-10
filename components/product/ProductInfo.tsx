@@ -18,7 +18,6 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
 
-
 interface Props {
   page: ProductDetailsPage | null;
   layout: {
