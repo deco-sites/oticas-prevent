@@ -17,6 +17,8 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import { useUI } from "$store/sdk/useUI.ts";
+import AddToCartButtonModalLente from "$store/components/product/ModalLente/AddToCartButtonModalLente.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -68,6 +70,14 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
+  const productName = layout?.name === "concat"
+  ? `${isVariantOf?.name} ${name}`
+  : layout?.name === "productGroup"
+  ? isVariantOf?.name
+  : name ;
+
+  const { displayModal } = useUI();
+  
   return (
     <div class="flex flex-col" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
@@ -111,11 +121,17 @@ function ProductInfo({ page, layout }: Props) {
             <>
               {platform === "vtex" && (
                 <>
-                  <AddToCartButtonVTEX
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                    seller={seller}
-                  />
+                  {productName?.includes("Óculos de Grau") || productName?.includes("Óculos de grau") ? (
+                    <AddToCartButtonModalLente/>
+                  ) : (
+                    <AddToCartButtonVTEX
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                      seller={seller}
+                    />
+                  )}
+                  
+                  
                   <WishlistButtonVtex
                     variant="full"
                     productID={productID}
