@@ -56,7 +56,7 @@ const onCloseModal = () => {
 };
 
 function ModalTab(
-  { text, active, onClick }: {
+  { text, active, onClick, index}: {
     text: string;
     active: boolean;
     onClick: () => void;
@@ -67,8 +67,8 @@ function ModalTab(
     <button
       onClick={onClick}
       class={`py-3.5 ${
-        active ? "bg-[#F8F8F8]" : "bg-[#D7F2EF]"
-      } text-center font-bold text-base cursor-pointer rounded-tl-2x`}
+        active ? "bg-[#F8F8F8] relative before:content[''] before:absolute before:w-full before:h-4 before:bg-[#F8F8F8] before:top-[-9px] before:rounded-t-2xl before:block" : "bg-[#D7F2EF]"
+      } ${index == 0 && !active ? "rounded-tl-2xl" : ""} ${index == 4 && !active ? "rounded-tr-2xl" : ""} text-center font-bold text-base cursor-pointer rounded-tl-2x`}
     >
       {text}
     </button>
@@ -94,7 +94,7 @@ function ModalCategoryType(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>{" "}
+                <span class="uppercase">Você selecionou: </span>{" "}
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -189,7 +189,7 @@ function ModalCategoryType(
 
 function ModalCategoryTec(
   { lentes, select, selecaoIndex, informacoes, selecaoCliente }: {
-    lentes: Lente[];
+    lentes: string[] | Lente[];
     select: (tecnologia: string) => void;
     selecaoIndex: number;
     informacoes: Object[];
@@ -205,7 +205,7 @@ function ModalCategoryTec(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>
+                <span class="uppercase">Você selecionou: </span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -310,7 +310,7 @@ function ModalCategoryTec(
 
 function ModalCategoryTrat(
   { lentes, select, selecaoIndex, selecaoCliente }: {
-    lentes: Lente[];
+    lentes: string[] | Lente[];
     select: (categoria: string) => void;
     selecaoIndex: number;
     selecaoCliente: string;
@@ -323,7 +323,7 @@ function ModalCategoryTrat(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>
+                <span class="uppercase">Você selecionou: </span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -433,7 +433,7 @@ function ModalCategoryReceita(
         </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5">
-          <input type='file' id='imgInp' accept=".jpg,.jpeg,.png"/>
+          <input type='file' id='imgReceita' accept=".jpg,.jpeg,.png"/>
           <div class="text-sm">Apenas arquivos no formato PDF ou JPG.</div>
         </div>
 
@@ -449,7 +449,7 @@ function ModalCategoryReceita(
           </div>
 
           <div class="flex gap-2 cursor-pointer items-center">
-            <input type="checkbox" id="envioreceita" class="appearance-none shadow-md border-2 border-white w-4 h-4 rounded-full checked:bg-secondary"/>
+            <input type="checkbox" id="envioreceita" class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"/>
             <label for="envioreceita">Entendi e aceito os termos para enviar mais tarde.</label>
           </div>
         </div>
@@ -466,43 +466,31 @@ function ReturnLente(
   },
 ) {
 
-
-  console.log("lentes", lentes);
-
   if (Number(quantitySelecaoCliente) >= 3) {
     let _lente: Lente[] | null = null;
 
     _lente = lentes?.filter((lente) =>
-      lente.categorias ? lente?.categorias[0] : null === selecaoCliente[0] &&
-          lente.categorias
-        ? lente?.categorias[1]
-        : null === selecaoCliente[1] &&
-            lente.categorias
-        ? lente?.categorias[2]
-        : null === selecaoCliente[2]
+      lente?.categorias[0] === selecaoCliente[0] &&
+      lente?.categorias[1] === selecaoCliente[1] &&
+      lente?.categorias[2] === selecaoCliente[2]
     );
 
-    console.log("_lente", _lente);
-    console.log("selecaoCliente", selecaoCliente);
-
-
-    if (_lente[0]?.categorias != null && _lente[0]?.categorias != undefined) {
-      return (
-        <>
-          <div class="w-px h-auto bg-[#9C9C9C]"></div>
-          <div>
-            <div class="text-white text-sm uppercase">Subtotal com lentes</div>
-            <div class="text-[#119184] text-lg font-bold">
-              {formatPrice(
-                _lente[0].price,
-                "BRL",
-                "pt-BR",
-              )}
-            </div>
+    return (
+      <>
+        <div class="w-px h-auto bg-[#9C9C9C]"></div>
+        <div>
+          <div class="text-white text-sm uppercase">Subtotal com lentes</div>
+          <div class="text-[#119184] text-lg font-bold">
+            {formatPrice(
+              _lente[0].price,
+              "BRL",
+              "pt-BR",
+            )}
           </div>
-        </>
-      );
-    }
+        </div>
+      </>
+    );
+    
 
   }
 }
@@ -566,8 +554,11 @@ export default function ModalLentes(
   };
 
   const changeTab = (index: number) => {
+    const proximo = selecaoDoCliente.value.length;
+
     if (index < activeTabIndex.value) {
-      const anterior = Math.max(activeTabIndex.value - 1, 0);
+      activeTabIndex.value = index;
+    } else if (index == proximo || proximo >= index) {
       activeTabIndex.value = index;
     }
   };
@@ -712,6 +703,7 @@ export default function ModalLentes(
                   onClick={() => {
                     changeTab(0);
                   }}
+                  index={0}
                 />
                 <ModalTab
                   text="Tecnologia"
@@ -719,6 +711,7 @@ export default function ModalLentes(
                   onClick={() => {
                     changeTab(1);
                   }}
+                  index={1}
                 />
                 <ModalTab
                   text="Tratamento"
@@ -726,6 +719,7 @@ export default function ModalLentes(
                   onClick={() => {
                     changeTab(2);
                   }}
+                  index={2}
                 />
                 <ModalTab
                   text="Receita"
@@ -733,11 +727,13 @@ export default function ModalLentes(
                   onClick={() => {
                     changeTab(3);
                   }}
+                  index={3}
                 />
                 <ModalTab
                   text="Seu Rosto"
                   active={activeTab === "seuRosto"}
                   onClick={() => {}}
+                  index={4}
                 />
               </div>
               <div class="bg-[#F8F8F8] rounded-b-2xl py-7 px-8">
@@ -773,7 +769,7 @@ export default function ModalLentes(
                   </div>
                 </div>
                 <ReturnLente
-                  lentes={elementsToRender.value}
+                  lentes={lentes?.value}
                   quantitySelecaoCliente={selecaoDoCliente.value.length}
                   selecaoCliente={selecaoDoCliente.value}
                 />
