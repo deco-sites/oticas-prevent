@@ -424,9 +424,8 @@ function ModalCategoryReceita(
   },
 ) {  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    statusAnexo = true;
-    const files = event.target.files;
-    if (files && files.length > 0) {
+    const files = event?.target?.files;
+    if (files && files?.length > 0) {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -437,10 +436,10 @@ function ModalCategoryReceita(
           size: file.size,
           content: fileContent,
         };
-        sessionStorage.setItem("teste", JSON.stringify(fileData.content));
-        console.log("Anexo selecionado e salvo na sessionStorage:", fileData.content);
+        sessionStorage.setItem("receita", JSON.stringify(fileData.content));
       };
       reader.readAsDataURL(file);
+      select("")
     }
   }; 
 
@@ -565,6 +564,27 @@ function ModalCategoryRosto(
     select: (categoria: string) => void;
   },
 ) {
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event?.target?.files;
+    if (files && files?.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const fileContent = event.target?.result;
+        const fileData: FileData = { 
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          content: fileContent,
+        };
+        sessionStorage.setItem("rosto", JSON.stringify(fileData.content));
+      };
+      reader.readAsDataURL(file);
+      select("")
+    }
+  };
+
   return (
     <div class="flex gap-5">
       <div class="max-w-[407px] mt-6">
@@ -633,7 +653,7 @@ function ModalCategoryRosto(
             </svg>
             <span>ANEXAR ARQUIVO</span>
           </div>
-          <input type="file" id="imgReceita" accept=".jpg,.jpeg,.png" class="h-12 opacity-0 cursor-pointer" />
+          <input type="file" id="imgReceita" accept=".jpg,.jpeg,.png" class="h-12 opacity-0 cursor-pointer" onChange={handleFileChange} />
           <div class="text-sm mt-2 block">Apenas arquivos no formato PDF ou JPG.</div>
         </div>
 
