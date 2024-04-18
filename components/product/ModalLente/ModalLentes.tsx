@@ -124,7 +124,7 @@ function ModalCategoryType(
         </div>
       </div>
 
-      <div class="grid grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {categorias.map((categoria, index) => (
           <div
             className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
@@ -235,7 +235,7 @@ function ModalCategoryTec(
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {lentes.map((categoria, index) => {
           const categoriaAtual = categoria?.categorias[selecaoIndex];
 
@@ -353,7 +353,7 @@ function ModalCategoryTrat(
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {lentes.map((lente) => (
           <div
             className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
@@ -978,7 +978,7 @@ export default function ModalLentes(
       onClose={() => displayModal.value = false}
     >
       <div class="w-screen h-screen flex">
-        <div class="flex flex-col gap-2 bg-white justify-between m-auto max-w-[1366px] max-h-[724px] w-11/12 h-[95%] rounded-lg">
+        <div class="flex flex-col gap-2 bg-white  justify-start m-auto max-w-[1366px] max-h-[724px] w-11/12 h-[95%] rounded-lg relative">
           <div class="relative pt-8 pb-6 px-6">
             <div
               class="absolute no-animation right-3 top-3 rounded-full border-2 border-[#119184] cursor-pointer p-1"
@@ -1024,7 +1024,7 @@ export default function ModalLentes(
               {titulodoModal}
             </div>
           </div>
-          <div class="p-3">
+          <div class="overflow-y-auto mb-16 pb-12">
             <div class="flex flex-col max-w-screen-xl w-full m-auto">
               <div class="grid gap-1 grid-cols-5">
                 <ModalTab
@@ -1068,13 +1068,13 @@ export default function ModalLentes(
                   index={4}
                 />
               </div>
-              <div class="bg-[#F8F8F8] rounded-b-2xl py-7 px-8">
+              <div class="bg-[#F8F8F8] rounded-b-2xl py-7 px-4 md:px-8">
                 {categories[activeTab]}
               </div>
             </div>
           </div>
 
-          <div class="bg-[#0B0E0D] p-3 rounded-b-lg">
+          <div class="bg-[#0B0E0D] p-3 rounded-b-lg absolute bottom-0 left-0 right-0">
             <div class="flex flex-col w-full m-auto max-w-screen-lg">
               <div class="flex justify-between">
                 <div class="flex gap-6">
