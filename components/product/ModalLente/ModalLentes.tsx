@@ -587,7 +587,7 @@ function ModalCategoryRosto(
 
   return (
     <div class="flex gap-5">
-      <div class="max-w-[407px] mt-6">
+      <div class="max-w-[407px] mt-6 hidden md:block">
         <Image
           class="group-disabled:border-base-300"
           src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/d9d970b5-b9f7-4e24-b458-40d20bce5272"
@@ -1076,9 +1076,9 @@ export default function ModalLentes(
 
           <div class="bg-[#0B0E0D] p-3 rounded-b-lg absolute bottom-0 left-0 right-0">
             <div class="flex flex-col w-full m-auto max-w-screen-lg">
-              <div class="flex justify-between">
-                <div class="flex gap-6">
-                  <div>
+              <div class="flex justify-between flex-col sm:flex-row">
+                <div class="gap-6 hidden md:flex">
+                  <div> 
                     <Image
                       class="group-disabled:border-base-300"
                       width={64}
