@@ -79,7 +79,7 @@ function ProductInfo({ page, layout }: Props) {
   const { displayModal } = useUI();
   
   return (
-    <div class="flex flex-col" id={id}>
+    <div class="flex flex-col px-2.5" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">

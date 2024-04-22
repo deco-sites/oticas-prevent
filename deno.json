@@ -2,8 +2,8 @@
   "imports": {
     "deco-sites/oticas-prevent/": "./",
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.60.18/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.35.32/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.61.4/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.36.13/",
     "$fresh/": "https://deno.land/x/fresh@1.6.7/",
     "preact": "https://esm.sh/preact@10.19.6",
     "preact/": "https://esm.sh/preact@10.19.6/",

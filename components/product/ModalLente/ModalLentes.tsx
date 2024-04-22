@@ -64,25 +64,46 @@ const onCloseModal = () => {
 };
 
 function ModalTab(
-  { text, active, onClick, index }: {
+  { text, active, onClick, index, selecaoClienteSize }: {
     text: string;
     active: boolean;
     onClick: () => void;
     index: number;
+    selecaoClienteSize: number;
   },
 ) {
   return (
     <button
       onClick={onClick}
-      class={`py-3.5 ${
+      class={`md:py-3.5 ${
         active
-          ? "bg-[#F8F8F8] relative before:content[''] before:absolute before:w-full before:h-4 before:bg-[#F8F8F8] before:top-[-9px] before:rounded-t-2xl before:block"
-          : "bg-[#D7F2EF]"
-      } ${index == 0 && !active ? "rounded-tl-2xl" : ""} ${
-        index == 4 && !active ? "rounded-tr-2xl" : ""
-      } text-center font-bold text-base cursor-pointer rounded-tl-2x`}
+          ? "bg-[#119184] text-white md:text-black md:bg-[#F8F8F8] relative md:before:content[''] md:before:absolute md:before:w-full md:before:h-4 md:before:bg-[#F8F8F8] md:before:top-[-9px] md:before:rounded-t-2xl md:before:block"
+          : "bg-white border border-[#D0D0D0] md:bg-[#D7F2EF] md:border-0"
+      } ${index == 0 && !active ? "rounded-full md:rounded-none md:rounded-tl-2xl" : "rounded-full md:rounded-none"} ${
+        index == 4 && !active ? "rounded-full md:rounded-none md:rounded-tr-2xl" : "rounded-full md:rounded-none"
+      } text-center font-bold text-sm md:text-base cursor-pointer rounded-tl-2x w-7 h-7 md:w-auto md:h-auto`}
     >
-      {text}
+      <span class="hidden md:block">
+        {text}
+      </span>
+
+      {selecaoClienteSize >= (index + 1) ? 
+      (
+        <span class="flex justify-center md:hidden rounded-full bg-white w-fit m-auto p-px">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.0001 0.25C8.07176 0.25 6.1867 0.821828 4.58332 1.89317C2.97994 2.96451 1.73026 4.48726 0.992301 6.26884C0.254347 8.05042 0.0612641 10.0108 0.43747 11.9021C0.813676 13.7934 1.74227 15.5307 3.10584 16.8943C4.4694 18.2579 6.20668 19.1865 8.098 19.5627C9.98931 19.9389 11.9497 19.7458 13.7313 19.0078C15.5129 18.2699 17.0356 17.0202 18.107 15.4168C19.1783 13.8134 19.7501 11.9284 19.7501 10C19.7474 7.41498 18.7193 4.93661 16.8914 3.10872C15.0635 1.28084 12.5851 0.25273 10.0001 0.25ZM14.2808 8.28063L9.03075 13.5306C8.9611 13.6004 8.87838 13.6557 8.78733 13.6934C8.69628 13.7312 8.59869 13.7506 8.50013 13.7506C8.40156 13.7506 8.30397 13.7312 8.21292 13.6934C8.12187 13.6557 8.03916 13.6004 7.9695 13.5306L5.7195 11.2806C5.57877 11.1399 5.49971 10.949 5.49971 10.75C5.49971 10.551 5.57877 10.3601 5.7195 10.2194C5.86023 10.0786 6.0511 9.99958 6.25013 9.99958C6.44915 9.99958 6.64002 10.0786 6.78075 10.2194L8.50013 11.9397L13.2195 7.21937C13.2892 7.14969 13.3719 7.09442 13.463 7.0567C13.554 7.01899 13.6516 6.99958 13.7501 6.99958C13.8487 6.99958 13.9463 7.01899 14.0373 7.0567C14.1283 7.09442 14.2111 7.14969 14.2808 7.21937C14.3504 7.28906 14.4057 7.37178 14.4434 7.46283C14.4811 7.55387 14.5005 7.65145 14.5005 7.75C14.5005 7.84855 14.4811 7.94613 14.4434 8.03717C14.4057 8.12822 14.3504 8.21094 14.2808 8.28063Z" fill="#2F9B3E"/>
+          </svg>
+        </span>
+      ) : (
+        <span class="block md:hidden">
+        {text === "Tipo" ? "1" :
+          text === "Tecnologia" ? "2" :
+          text === "Tratamento" ? "3" :
+          text === "Receita" ? "4" : "5"}
+  
+        </span>
+      )}
+     
     </button>
   );
 }
@@ -112,11 +133,17 @@ function ModalCategoryType(
             </div>
           )
           : (
-            <div class="text-center text-sm text-[#119184] uppercase">
-              <p>Primeiro passo</p>
-            </div>
+            <>
+              <div class="text-center text-sm text-[#119184] uppercase hidden md:block">
+                <p>Primeiro passo</p>
+              </div>
+
+              <div class="text-center text-sm text-[#119184] uppercase block md:hidden">
+                <p>1 de 5</p>
+              </div>
+            </>
           )}
-        <div class="text-center text-xl font-medium">
+        <div class="text-center text-sm md:text-xl font-medium">
           <p>
             Escolha o <span class="font-bold">tipo das lentes</span>{" "}
             para prosseguir:
@@ -224,18 +251,24 @@ function ModalCategoryTec(
             </div>
           )
           : (
-            <div class="text-center text-sm text-[#119184] uppercase">
-              <p>Segundo passo</p>
-            </div>
+            <>
+              <div class="text-center text-sm text-[#119184] uppercase hidden md:block">
+                <p>Segundo passo</p>
+              </div>
+
+              <div class="text-center text-sm text-[#119184] uppercase block md:hidden">
+                <p>2 de 5</p>
+              </div>
+            </>
           )}
-        <div class="text-center text-xl font-medium">
+        <div class="text-center text-sm md:text-xl font-medium">
           <p>
             Escolha a <span class="font-bold">tecnologia das lentes</span>
             para prosseguir:
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-4 sm:grid-cols-4">
         {lentes.map((categoria, index) => {
           const categoriaAtual = categoria?.categorias[selecaoIndex];
 
@@ -342,18 +375,24 @@ function ModalCategoryTrat(
             </div>
           )
           : (
-            <div class="text-center text-sm text-[#119184] uppercase">
-              <p>Terceiro passo</p>
-            </div>
+            <>
+              <div class="text-center text-sm text-[#119184] uppercase hidden md:block">
+                <p>Terceiro passo</p>
+              </div>
+
+              <div class="text-center text-sm text-[#119184] uppercase block md:hidden">
+                <p>3 de 5</p>
+              </div>
+            </>
           )}
-        <div class="text-center text-xl font-medium">
+        <div class="text-center text-sm md:text-xl font-medium">
           <p>
             Escolha o <span class="font-bold">tratamento das lentes</span>
             para prosseguir:
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:grid-cols-4">
         {lentes.map((lente) => (
           <div
             className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
@@ -445,7 +484,7 @@ function ModalCategoryReceita(
 
   return (
     <div class="flex flex-col gap-5">
-      <div class="flex flex-col gap-8 max-w-[487px] m-auto">
+      <div class="flex flex-col gap-2 md:gap-8 max-w-[487px] m-auto w-full">
         {selecaoCliente != "" && selecaoCliente != undefined
           ? ( 
             <div class="text-center text-sm text-[#119184]">
@@ -455,11 +494,17 @@ function ModalCategoryReceita(
             </div>
           )
           : (
-            <div class="text-center text-sm text-[#119184] uppercase">
-              <p>Quarto passo</p>
-            </div>
+            <>
+              <div class="text-center text-sm text-[#119184] uppercase hidden md:block">
+                <p>Quarto passo</p>
+              </div>
+
+              <div class="text-center text-sm text-[#119184] uppercase block md:hidden">
+                <p>4 de 5</p>
+              </div>
+            </>
           )}
-        <div class="text-center text-xl font-medium">
+        <div class="text-center text-sm md:text-xl font-medium">
           <p>
             Envie uma foto da sua <span class="font-bold">receita médica</span>
           </p>
@@ -509,7 +554,7 @@ function ModalCategoryReceita(
         </div>
 
         <div class="flex flex-col gap-4">
-          <div class="text-base">
+          <div class="text-xs md:text-base">
             Se preferir, poderá enviar a receita médica posteriormente pelo
             e-mail{" "}
             <span class="font-bold underline-offset-4 text-[#119184]">
@@ -536,9 +581,9 @@ function ModalCategoryReceita(
             </a>
           </div>
 
-          <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-sm text-center">
+          <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-xs md:text-sm text-center">
             Mas, lembre-se de{" "}
-            <span class="font-bold text-base">incluir o número do pedido!</span>
+            <span class="font-bold text-xs md:text-base">incluir o número do pedido!</span>
           </div>
 
           <div class="flex gap-2 cursor-pointer items-center">
@@ -548,7 +593,7 @@ function ModalCategoryReceita(
               onClick={() => select("")}
               class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
             />
-            <label for="envioreceita">
+            <label for="envioreceita" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
           </div>
@@ -594,12 +639,12 @@ function ModalCategoryRosto(
           width={450}
           height={200}
         />
-        <div class="text-center text-base font-medium mt-6">
+        <div class="text-center text-xs md:text-base font-medium mt-6">
           A Distância Naso Pupilar (DNP) é essencial para fazermos seus óculos
           na medida ideal para você!
         </div>
       </div>
-      <div class="flex flex-col gap-8 max-w-[487px] m-auto">
+      <div class="flex flex-col gap-2 md:gap-8 max-w-[487px] m-auto w-full">
         {selecaoCliente != "" && selecaoCliente != undefined
           ? (
             <div class="text-center text-sm text-[#119184]">
@@ -609,11 +654,17 @@ function ModalCategoryRosto(
             </div>
           )
           : (
-            <div class="text-center text-sm text-[#119184] uppercase">
-              <p>ÚLTIMO PASSO!</p>
-            </div>
+            <>
+              <div class="text-center text-sm text-[#119184] uppercase hidden md:block">
+                <p>Ultimo Passo</p>
+              </div>
+
+              <div class="text-center text-sm text-[#119184] uppercase block md:hidden">
+                <p>5 de 5</p>
+              </div>
+            </>
           )}
-        <div class="text-center text-xl font-medium">
+        <div class="text-center text-sm md:text-xl font-medium">
           <p>
             Envia uma{" "}
             <span class="font-bold">foto do seu rosto segurando um cartão</span>
@@ -658,7 +709,7 @@ function ModalCategoryRosto(
         </div>
 
         <div class="flex flex-col gap-4">
-          <div class="text-base">
+          <div class="text-sm md:text-base">
             Se preferir, poderá enviar a receita médica posteriormente pelo
             e-mail{" "}
             <span class="font-bold underline-offset-4 text-[#119184]">
@@ -685,9 +736,9 @@ function ModalCategoryRosto(
             </a>
           </div>
 
-          <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-sm text-center">
+          <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-xs md:text-sm text-center">
             Mas, lembre-se de{" "}
-            <span class="font-bold text-base">incluir o número do pedido!</span>
+            <span class="font-bold text-xs md:text-base">incluir o número do pedido!</span>
           </div>
 
           <div class="flex gap-2 cursor-pointer items-center">
@@ -697,7 +748,7 @@ function ModalCategoryRosto(
               onClick={() => select("")} 
               class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
             />
-            <label for="enviorosto">
+            <label for="enviorosto" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
           </div>
@@ -725,8 +776,8 @@ function ReturnLente(
 
     return (
       <>
-        <div class="w-px h-auto bg-[#9C9C9C]"></div>
-        <div>
+        <div class="w-px h-auto bg-[#9C9C9C] hidden md:block"></div>
+        <div class="text-center md:text-left mb-2 md:mb-0">
           <div class="text-white text-sm uppercase">Subtotal com lentes</div>
           <div class="text-[#119184] text-lg font-bold">
             {formatPrice(
@@ -746,7 +797,7 @@ function AddCartModal({ quantitySelecaoCliente, armacao, lente }: {
 }) {
   return (
     <div class="flex flex-col gap-2">
-      {quantitySelecaoCliente >= 4
+      {quantitySelecaoCliente >= 5
         ? (
           <div
             class="text-center bg-[#2F9B3E] h-[32px] rounded-[200px] p-2 cursor-pointer uppercase text-xs text-white font-semibold"
@@ -978,8 +1029,8 @@ export default function ModalLentes(
       onClose={() => displayModal.value = false}
     >
       <div class="w-screen h-screen flex">
-        <div class="flex flex-col gap-2 bg-white  justify-start m-auto max-w-[1366px] max-h-[724px] w-11/12 h-[95%] rounded-lg relative">
-          <div class="relative pt-8 pb-6 px-6">
+        <div class="flex flex-col gap-3 md:gap-2 bg-white  justify-start m-auto max-w-[1366px] max-h-[724px] w-screen md:w-11/12 h-screen md:h-[95%] md:rounded-lg relative">
+          <div class="relative md:px-6 md:pt-8 md:pb-6 py-3.5 px-16 bg-[#DCF5F3] md:bg-white">
             <div
               class="absolute no-animation right-3 top-3 rounded-full border-2 border-[#119184] cursor-pointer p-1"
               onClick={onCloseModal}
@@ -1020,13 +1071,13 @@ export default function ModalLentes(
               </svg>
             </div>
 
-            <div class="w-full text-center uppercase text-xl font-bold">
+            <div class="w-full text-center uppercase text-sm md:text-xl font-bold">
               {titulodoModal}
             </div>
           </div>
           <div class="overflow-y-auto mb-16 pb-12">
-            <div class="flex flex-col max-w-screen-xl w-full m-auto">
-              <div class="grid gap-1 grid-cols-5">
+            <div class="flex flex-col gap-3 md:gap-0 max-w-screen-xl w-full m-auto">
+              <div class="flex gap-2 justify-center md:justify-normal md:grid md:gap-1 md:grid-cols-5">
                 <ModalTab
                   text="Tipo"
                   active={activeTab === "tipo"}
@@ -1034,6 +1085,7 @@ export default function ModalLentes(
                     changeTab(0);
                   }}
                   index={0}
+                  selecaoClienteSize={selecaoDoCliente.value.length}
                 />
                 <ModalTab
                   text="Tecnologia"
@@ -1042,6 +1094,7 @@ export default function ModalLentes(
                     changeTab(1);
                   }}
                   index={1}
+                  selecaoClienteSize={selecaoDoCliente.value.length}
                 />
                 <ModalTab
                   text="Tratamento"
@@ -1050,6 +1103,7 @@ export default function ModalLentes(
                     changeTab(2);
                   }}
                   index={2}
+                  selecaoClienteSize={selecaoDoCliente.value.length}
                 />
                 <ModalTab
                   text="Receita"
@@ -1058,6 +1112,7 @@ export default function ModalLentes(
                     changeTab(3);
                   }}
                   index={3}
+                  selecaoClienteSize={selecaoDoCliente.value.length}
                 />
                 <ModalTab
                   text="Seu Rosto"
@@ -1066,15 +1121,16 @@ export default function ModalLentes(
                     changeTab(4);
                   }}
                   index={4}
+                  selecaoClienteSize={selecaoDoCliente.value.length}
                 />
               </div>
-              <div class="bg-[#F8F8F8] rounded-b-2xl py-7 px-4 md:px-8">
+              <div class="bg-white md:bg-[#F8F8F8] rounded-b-2xl pt-0 pb-7 md:py-7 px-4 md:px-8">
                 {categories[activeTab]}
               </div>
             </div>
           </div>
 
-          <div class="bg-[#0B0E0D] p-3 rounded-b-lg absolute bottom-0 left-0 right-0">
+          <div class="bg-[#0B0E0D] p-3 rounded-t-lg md:rounded-none md:rounded-b-lg absolute bottom-0 left-0 right-0">
             <div class="flex flex-col w-full m-auto max-w-screen-lg">
               <div class="flex justify-between flex-col sm:flex-row">
                 <div class="gap-6 hidden md:flex">

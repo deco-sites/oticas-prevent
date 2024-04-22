@@ -42,7 +42,7 @@ function GridItem({ children, layout }: Props) {
         layout?.colSpan?.mobile && grid.colSpan.mobile[layout.colSpan.mobile],
         layout?.colSpan?.desktop &&
           grid.colSpan.desktop[layout.colSpan.desktop],
-      )}
+      )} 
     >
       {children && <children.Component {...children.props} />}
     </div>
