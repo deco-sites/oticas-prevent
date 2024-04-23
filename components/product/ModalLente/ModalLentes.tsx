@@ -120,6 +120,8 @@ function ModalCategoryType(
     informacoes?.filter((item) => item?.tipoLente === categoria)
   );
 
+  console.log('informacoesFiltradas', informacoesFiltradas);
+  console.log('categorias', categorias);
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-4">
