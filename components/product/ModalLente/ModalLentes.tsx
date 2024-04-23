@@ -268,7 +268,7 @@ function ModalCategoryTec(
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
         {lentes.map((categoria, index) => {
           const categoriaAtual = categoria?.categorias[selecaoIndex];
 
@@ -392,7 +392,7 @@ function ModalCategoryTrat(
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:grid-cols-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
         {lentes.map((lente) => (
           <div
             className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
