@@ -54,7 +54,7 @@ export default function FooterItems(
                   <input id={section.label} type="checkbox" class="min-h-[0]" />
                   <label
                     htmlFor={section.label}
-                    class="collapse-title min-h-[0] !p-0 flex gap-2"
+                    class="collapse-title min-h-[0] !p-0 flex gap-2 text-white"
                   >
                     <span>{section.label}</span>
                   </label>

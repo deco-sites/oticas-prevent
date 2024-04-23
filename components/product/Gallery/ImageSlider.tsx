@@ -47,12 +47,8 @@ export default function GallerySlider(props: Props) {
             >
               <Image
                 class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
                 src={img.url!}
                 alt={img.alternateName}
-                width={width}
-                height={height}
                 // Preload LCP image for better web vitals
                 preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
@@ -90,10 +86,9 @@ export default function GallerySlider(props: Props) {
           <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
             <Slider.Dot index={index}>
               <Image
-                style={{ aspectRatio }}
                 class="group-disabled:border-base-300 border rounded "
                 width={63}
-                height={87.5}
+                height={63}
                 src={img.url!}
                 alt={img.alternateName}
               />
