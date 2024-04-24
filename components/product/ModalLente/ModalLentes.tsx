@@ -64,12 +64,13 @@ const onCloseModal = () => {
 };
 
 function ModalTab(
-  { text, active, onClick, index, selecaoClienteSize }: {
+  { text, active, onClick, index, selecaoClienteSize, selecaoCliente }: {
     text: string;
     active: boolean;
     onClick: () => void;
     index: number;
     selecaoClienteSize: number;
+    selecaoCliente: string[];
   },
 ) {
   return (
@@ -129,7 +130,7 @@ function ModalCategoryType(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>{" "}
+                <span class="uppercase">Você selecionou: </span>{" "}
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -153,10 +154,10 @@ function ModalCategoryType(
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div class="grid grid-cols-2 gap-1 md:gap-4 sm:grid-cols-4">
         {categorias.map((categoria, index) => (
           <div
-            className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
+            className={`p-3 md:p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-2.5 md:gap-3 ${
               categoria === selecaoCliente
                 ? "border-4 border-[#119184]"
                 : "border border-[#D0D0D0]"
@@ -182,15 +183,16 @@ function ModalCategoryType(
             </div>
 
             {informacoesFiltradas[index]?.map((info, i) => (
-              <div class="text-center font-semibold">
+              <div class="text-center font-semibold text-xs md:text-base">
                 {info.descricao}
               </div>
             ))}
 
             {categoria === selecaoCliente
               ? (
-                <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary">
+                <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                   <svg
+                    class="w-5 md:w-6"
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
                     height="25"
@@ -218,7 +220,7 @@ function ModalCategoryType(
                 </div>
               )
               : (
-                <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary">
+                <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                   Quero este
                 </div>
               )}
@@ -247,7 +249,7 @@ function ModalCategoryTec(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>
+                <span class="uppercase">Você selecionou: </span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -265,7 +267,7 @@ function ModalCategoryTec(
           )}
         <div class="text-center text-sm md:text-xl font-medium">
           <p>
-            Escolha a <span class="font-bold">tecnologia das lentes</span>
+            Escolha a <span class="font-bold">tecnologia das lentes </span>
             para prosseguir:
           </p>
         </div>
@@ -314,8 +316,9 @@ function ModalCategoryTec(
 
                 {categoriaAtual === selecaoCliente
                   ? (
-                    <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary">
+                    <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                       <svg
+                        class="w-5 md:w-6"
                         xmlns="http://www.w3.org/2000/svg"
                         width="25"
                         height="25"
@@ -343,7 +346,7 @@ function ModalCategoryTec(
                     </div>
                   )
                   : (
-                    <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary">
+                    <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                       Quero este
                     </div>
                   )}
@@ -371,7 +374,7 @@ function ModalCategoryTrat(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou:</span>
+                <span class="uppercase">Você selecionou: </span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -389,7 +392,7 @@ function ModalCategoryTrat(
           )}
         <div class="text-center text-sm md:text-xl font-medium">
           <p>
-            Escolha o <span class="font-bold">tratamento das lentes</span>
+            Escolha o <span class="font-bold">tratamento das lentes  </span>
             para prosseguir:
           </p>
         </div>
@@ -418,8 +421,9 @@ function ModalCategoryTrat(
 
             {lente?.categorias[selecaoIndex] === selecaoCliente
               ? (
-                <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary">
+                <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                   <svg
+                    class="w-5 md:w-6"
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
                     height="25"
@@ -447,7 +451,7 @@ function ModalCategoryTrat(
                 </div>
               )
               : (
-                <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary">
+                <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
                   Quero este
                 </div>
               )}
@@ -1080,6 +1084,24 @@ export default function ModalLentes(
           <div class="overflow-y-auto mb-16 pb-12">
             <div class="flex flex-col gap-3 md:gap-0 max-w-screen-xl w-full m-auto">
               <div class="flex gap-2 justify-center md:justify-normal md:grid md:gap-1 md:grid-cols-5">
+                {activeTabIndex.value > 0 ? 
+                  (
+                    <div 
+                      class="text-xs flex flex-col justify-center items-center gap-1.5 font-bold md:hidden"
+                      onClick={() => {
+                        changeTab(activeTabIndex.value - 1);
+                      }}
+                    >
+                      <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="30.175" y="30" width="30" height="30" rx="15" transform="rotate(180 30.175 30)" fill="#0B0E0D"/>
+                        <path d="M15.0188 7.96876C11.1356 7.96876 7.98756 11.1168 7.98756 15C7.98756 18.8833 11.1356 22.0313 15.0188 22.0313C18.9021 22.0313 22.05 18.8833 22.05 15C22.05 11.1168 18.9021 7.96876 15.0188 7.96876Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+                        <path d="M15.8977 17.6367L12.968 15L15.8977 12.3633" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+
+                      Anterior
+                    </div>
+                  ) : ("")}
+                
                 <ModalTab
                   text="Tipo"
                   active={activeTab === "tipo"}
@@ -1088,6 +1110,7 @@ export default function ModalLentes(
                   }}
                   index={0}
                   selecaoClienteSize={selecaoDoCliente.value.length}
+                  selecaoCliente= {selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Tecnologia"
@@ -1097,6 +1120,7 @@ export default function ModalLentes(
                   }}
                   index={1}
                   selecaoClienteSize={selecaoDoCliente.value.length}
+                  selecaoCliente= {selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Tratamento"
@@ -1106,6 +1130,7 @@ export default function ModalLentes(
                   }}
                   index={2}
                   selecaoClienteSize={selecaoDoCliente.value.length}
+                  selecaoCliente= {selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Receita"
@@ -1115,6 +1140,7 @@ export default function ModalLentes(
                   }}
                   index={3}
                   selecaoClienteSize={selecaoDoCliente.value.length}
+                  selecaoCliente= {selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Seu Rosto"
@@ -1124,7 +1150,25 @@ export default function ModalLentes(
                   }}
                   index={4}
                   selecaoClienteSize={selecaoDoCliente.value.length}
+                  selecaoCliente= {selecaoDoCliente.value}
                 />
+
+                {activeTabIndex.value < 4 ? 
+                  (
+                    <div 
+                      class="text-xs flex flex-col justify-center items-center gap-1.5 font-bold md:hidden"
+                      onClick={() => {
+                        changeTab(activeTabIndex.value + 1);
+                      }}
+                    >
+                      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="30" height="30" rx="15" transform="matrix(1 8.74228e-08 8.74228e-08 -1 0 30)" fill="#0B0E0D"/>
+                        <path d="M15.1562 7.96876C19.0395 7.96876 22.1875 11.1168 22.1875 15C22.1875 18.8833 19.0395 22.0313 15.1562 22.0313C11.273 22.0313 8.125 18.8833 8.125 15C8.125 11.1168 11.273 7.96876 15.1562 7.96876Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+                        <path d="M14.2773 17.6367L17.207 15L14.2773 12.3633" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      Próximo
+                    </div>
+                  ) : ("")}
               </div>
               <div class="bg-white md:bg-[#F8F8F8] rounded-b-2xl pt-0 pb-7 md:py-7 px-4 md:px-8">
                 {categories[activeTab]}

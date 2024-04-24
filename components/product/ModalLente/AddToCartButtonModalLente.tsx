@@ -12,7 +12,7 @@ export default function AddToCartButtonModalLente(){
     return (
         <div>
             <Button
-                class="btn no-animation btn-primary w-full"
+                class="btn no-animation btn-primary w-full bg-secondary text-white border-white"
                 onClick={onClick}
             >
                 Adicionar à  Sacola

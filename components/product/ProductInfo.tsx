@@ -131,12 +131,14 @@ function ProductInfo({ page, layout }: Props) {
                     />
                   )}
                   
-                  
-                  <WishlistButtonVtex
+                  <div  class="hidden">
+                    <WishlistButtonVtex
                     variant="full"
                     productID={productID}
                     productGroupID={productGroupID}
-                  />
+                    />
+                  </div>
+                 
                 </>
               )}
               {platform === "wake" && (
