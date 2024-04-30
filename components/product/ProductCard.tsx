@@ -142,7 +142,7 @@ function ProductCard({
       />
       <figure
         class="relative overflow-hidden"
-        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
+      
       >
         {/* Wishlist button */}
 
