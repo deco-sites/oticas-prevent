@@ -56,8 +56,8 @@ interface Props {
   platform?: Platform;
 }
 
-const WIDTH = 200;
-const HEIGHT = 279;
+const WIDTH = 350;
+const HEIGHT = 350;
 
 function ProductCard({
   product,
@@ -142,7 +142,7 @@ function ProductCard({
       />
       <figure
         class="relative overflow-hidden"
-      
+        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
         {/* Wishlist button */}
 
