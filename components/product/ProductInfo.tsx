@@ -19,9 +19,20 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import ProductSelector from "./ProductVariantSelector.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import AddToCartButtonModalLente from "$store/components/product/ModalLente/AddToCartButtonModalLente.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
+
+export interface ImagemMedidaArmacao {
+  /**
+   * @title Medida Armação
+   */
+  imagem?: ImageWidget;
+}
+
 
 interface Props {
   page: ProductDetailsPage | null;
+  imagemMedidaArmacao: ImagemMedidaArmacao;
   layout: {
     /**
      * @title Product Name
@@ -32,7 +43,9 @@ interface Props {
   };
 }
 
-function ProductInfo({ page, layout }: Props) {
+
+
+function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
   const platform = usePlatform();
   const id = useId();
   if (page === null) {
@@ -211,6 +224,18 @@ function ProductInfo({ page, layout }: Props) {
               />
             </details>
           )}
+
+          
+          <figure>
+            <Image
+              class="w-full"
+              src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/3141d4d8-1e8e-40e8-b822-f24ed93f0804"
+              width={160}
+              height={195}
+              loading="lazy"
+            />
+          </figure>
+       
         </span>
       </div>
       {/* Analytics Event */}
