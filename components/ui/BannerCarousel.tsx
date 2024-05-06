@@ -20,7 +20,7 @@ export interface Banner {
   /** @description mobile otimized image */
   mobile: ImageWidget;
   /** @description Image's alt text */
-  alt: string;
+  alt?: string;
   action?: {
     /** @description when user clicks on the image, go to this link */
     href: string;
@@ -126,12 +126,14 @@ function BannerItem(
           <span class="font-normal text-4xl text-base-100">
             {action.subTitle}
           </span>
-          <Button
-            class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
-            aria-label={action.label}
-          >
-            {action.label}
-          </Button>
+          {action.label && action.label.trim() !== "\u200E" && (
+            <Button
+              class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
+              aria-label={action.label}
+            >
+              {action.label}
+            </Button>
+          )}
         </div>
       )}
       <Picture preload={lcp}>
