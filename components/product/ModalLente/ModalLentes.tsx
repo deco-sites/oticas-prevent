@@ -155,12 +155,19 @@ function ModalCategoryType(
       </div>
 
       <div class="grid grid-cols-2 gap-1 md:gap-4 sm:grid-cols-4">
+          
         {categorias.map((categoria, index) => (
+          
           <div
-            className={`p-3 md:p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-2.5 md:gap-3 ${
+            className={`p-3 md:p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-between gap-2.5 md:gap-3 ${
               categoria === selecaoCliente
                 ? "border-4 border-[#119184]"
                 : "border border-[#D0D0D0]"
+            } ${
+              categoria === "Grau" ? "order-1" :
+              categoria === "Grau Alto" ? "order-2" :
+              categoria === "Multifocal" ? "order-3" :
+              categoria === "Linha Premium" ? "order-4" : "order-5"
             }`}
             onClick={() => select(categoria)}
           >
@@ -171,8 +178,8 @@ function ModalCategoryType(
                     ? "grayscale"
                     : ""
                 }`}
-                width={64}
-                height={64}
+                width={250}
+                height={160}
                 src={info?.imagem}
                 alt={categoria}
               />
