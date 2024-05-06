@@ -17,8 +17,8 @@ const colors: Record<string, string> = {
 
   // Color variants - only applied when no color as content is passed
   "active": "text-base-content ring-1 ring-black rounded-full",
-  "disabled": "line-through text-neutral-content",
-  "default": "text-base-content bg-base-100",
+  "disabled": "line-through text-neutral-content ring-1 ring-slate-400 rounded-full",
+  "default": "text-base-content bg-base-100 ring-1 ring-slate-400 rounded-full",
 };
 
 interface Props {
@@ -28,8 +28,8 @@ interface Props {
 
 const variants = {
   active: "text-base-content ring-1 ring-black rounded-full",
-  disabled: "line-through text-neutral-content",
-  default: "text-base-content bg-base-100",
+  disabled: "line-through text-neutral-content ring-1 ring-slate-400 rounded-full",
+  default: "text-base-content bg-base-100 ring-1 ring-slate-400 rounded-full",
 };
 
 function Avatar({ content, variant = "default" }: Props) {

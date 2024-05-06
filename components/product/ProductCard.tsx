@@ -325,7 +325,7 @@ function ProductCard({
         {l?.elementsPositions?.skuSelector === "Bottom" && (
           <>
             <ul
-              class={`flex items-center gap-2 w-full ${
+              class={`block md:flex items-center gap-2 w-full ${
                 align === "center" ? "justify-center" : "justify-between"
               } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
             >
@@ -335,7 +335,7 @@ function ProductCard({
                 )
                 : (
                   <li>
-                    <span class="text-base-300 font-light text-sm truncate">
+                    <span class="text-base-300 font-light text-sm md:truncate">
                       ou {installments}
                     </span>
                   </li>
