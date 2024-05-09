@@ -75,7 +75,7 @@ function ShippingSimulation({ items }: Props) {
   const { simulate, cart } = useCart();
 
   const handleSimulation = useCallback(async () => {
-    if (postalCode.value.length !== 8) {
+    if (postalCode.value.length < 8) {
       return;
     }
 
@@ -112,8 +112,8 @@ function ShippingSimulation({ items }: Props) {
           class="input input-bordered join-item w-48"
           placeholder="Seu cep aqui"
           value={postalCode.value}
-          maxLength={8}
-          size={8}
+          maxLength={9}
+          size={9}
           onChange={(e: { currentTarget: { value: string } }) => {
             postalCode.value = e.currentTarget.value;
           }}

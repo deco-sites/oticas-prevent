@@ -38,7 +38,7 @@ function Menu({ items }: Props) {
       </ul>
 
       <ul class="flex flex-col py-2 bg-base-200">
-        <li>
+        <li class="hidden">
           <a
             class="flex items-center gap-4 px-4 py-2"
             href="/wishlist"
@@ -50,13 +50,13 @@ function Menu({ items }: Props) {
         <li>
           <a
             class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
+            href="/lojas"
           >
             <Icon id="MapPin" size={24} strokeWidth={2} />
             <span class="text-sm">Nossas lojas</span>
           </a>
         </li>
-        <li>
+        <li class="hidden">
           <a
             class="flex items-center gap-4 px-4 py-2"
             href="https://www.deco.cx"
@@ -68,7 +68,7 @@ function Menu({ items }: Props) {
         <li>
           <a
             class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
+            href="/account"
           >
             <Icon id="User" size={24} strokeWidth={2} />
             <span class="text-sm">Minha conta</span>

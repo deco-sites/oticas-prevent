@@ -62,6 +62,33 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
     additionalProperty = [],
   } = product;
   const description = product.description || isVariantOf?.description;
+
+  const productFormato = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Formato"
+  )?.value;
+
+  const productTamanho = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Tamanho"
+  )?.value;
+
+  const productMaterial = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Material"
+  )?.value;
+
+  const productAro = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Aro ( largura das lentes)"
+  )?.value;
+
+  const productMedidaPonte = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Medida da Ponte"
+  )?.value;
+
+  const productComprimentoHastes = isVariantOf?.additionalProperty.find((prop) =>
+    prop?.name === "Comprimento das Hastes"
+  )?.value;
+
+ 
+
   const {
     price = 0,
     listPrice,
@@ -216,8 +243,8 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">
           {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
+            <details open>
+              <summary class="cursor-pointer font-bold">Descrição</summary>
               <div
                 class="ml-2 mt-2"
                 dangerouslySetInnerHTML={{ __html: description }}
@@ -237,6 +264,44 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
           </figure>
        
         </span>
+      </div>
+
+      {/* Especificações Produto*/}
+      <div class="text-sm">
+        {productFormato && (
+          <div>
+            <span class="font-bold">Formato dos Óculos:</span> <span>{productFormato}</span>
+          </div>
+        )}
+        {productTamanho && (
+          <div>
+            <span class="font-bold">Tamanho:</span> <span>{productTamanho}</span>
+          </div>
+        )}
+        {productMaterial && (
+          <div>
+            <span class="font-bold">Material:</span> <span>{productMaterial}</span> 
+          </div>
+        )}
+        
+        {productAro && (
+          <div>
+            <span class="font-bold">Aro ( largura das lentes):</span> <span>{productAro}</span>
+          </div>
+        )}
+        
+        {productMedidaPonte && (
+          <div>
+            <span class="font-bold">Medida da Ponte:</span> <span>{productMedidaPonte}</span>
+          </div>
+        )}
+       
+        {productComprimentoHastes && (
+          <div>
+            <span class="font-bold">Comprimento das Hastes:</span> <span>{productComprimentoHastes}</span>
+          </div>
+        )}
+        
       </div>
       {/* Analytics Event */}
       <SendEventOnView

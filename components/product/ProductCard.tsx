@@ -104,7 +104,7 @@ function ProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="btn btn-block bg-[#15B7A6] hover:bg-[#15B7A6] text-white"
     >
       {l?.basics?.ctaText || "Ver produto"}
     </a>
@@ -161,12 +161,12 @@ function ProductCard({
               l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
             }`}
           >
-            {platform === "vtex" && (
+            {/*platform === "vtex" && (
               <WishlistButtonVtex
                 productGroupID={productGroupID}
                 productID={productID}
               />
-            )}
+            )*/}
             {platform === "wake" && (
               <WishlistButtonWake
                 productGroupID={productGroupID}

@@ -14,7 +14,8 @@ export interface TecnologiaLente {
   /**
    * @title Tipo de Tecnologia
    */
-  tipotecnologia?: string;
+  label: string;
+  imagem?: ImageWidget;
   descricao?: string;
 }
 
@@ -29,7 +30,7 @@ export interface TipoLente {
   /**
    * @title Tipo de Lente
    */
-  tipoLente?: string;
+  label: string;
   imagem?: ImageWidget;
   descricao?: string;
   tecnologiaLente?: TecnologiaLente[];
@@ -118,11 +119,11 @@ function ModalCategoryType(
   },
 ) {
   const informacoesFiltradas = categorias.map((categoria) =>
-    informacoes?.filter((item) => item?.tipoLente === categoria)
+    informacoes?.filter((item) => item?.label === categoria)
   );
 
-  console.log('informacoesFiltradas', informacoesFiltradas);
-  console.log('categorias', categorias);
+  //console.log('informacoesFiltradas', informacoesFiltradas);
+  //console.log('categorias', categorias);
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-4">
@@ -289,7 +290,7 @@ function ModalCategoryTec(
             categoriasUnicas.add(categoriaAtual);
 
             const informacoesFiltradas = informacoes.filter((item) =>
-              item?.tipoLente === categoria?.categorias[0]
+              item?.label === categoria?.categorias[0]
             );
 
             return (
@@ -301,6 +302,32 @@ function ModalCategoryTec(
                 }`}
                 onClick={() => select(categoriaAtual)}
               >
+                {informacoesFiltradas.map((info, i) => (
+                  <>
+                    {info?.tecnologiaLente.map((tecnologia, index) => {
+                     
+                      if (tecnologia.label === categoriaAtual) {
+                        if(tecnologia?.imagem){
+                          return (
+                            <Image
+                            className={`group-disabled:border-base-300 w-full rounded-lg ${
+                              categoriaAtual != selecaoCliente && selecaoCliente != ""
+                                ? "grayscale"
+                                : ""
+                            }`}
+                            width={250}
+                            height={160}
+                            src={tecnologia?.imagem}
+                            alt={categoriaAtual}
+                          />
+                          );
+                        }
+                        
+                      }
+                    })}
+                  </>
+                ))}
+                
                 <div class="font-bold text-[#119184] uppercase text-xl text-center">
                   {categoriaAtual}
                 </div>
@@ -308,7 +335,7 @@ function ModalCategoryTec(
                 {informacoesFiltradas.map((info, i) => (
                   <div class="text-center font-medium text-sm">
                     {info?.tecnologiaLente.map((tecnologia, index) => {
-                      if (tecnologia.tipotecnologia === categoriaAtual) {
+                      if (tecnologia.label === categoriaAtual) {
                         return (
                           <div>
                             {tecnologia.descricao}
@@ -861,6 +888,7 @@ export default function ModalLentes(
 
   const selecaoDoCliente = useSignal<string[]>([]);
 
+  //console.log(product);
   const proximo = () => {
     const proximo = Math.min(activeTabIndex.value + 1, abas.length - 1);
     activeTabIndex.value = proximo;
@@ -987,13 +1015,15 @@ export default function ModalLentes(
       new Set(_lentes.map((lente) => lente?.categorias[tabIndex])),
     );
   });
-
+  
+  /*
   console.log({
     PRODUCTS: products,
     LENTES: lentes.value,
     ELEMENTS: elementsToRender.value,
     INFORMACOES: informacoesModal,
   });
+  */
 
   const categories: Record<Aba, JSX.Element> = {
     tipo: (
