@@ -756,7 +756,7 @@ function ModalCategoryRosto(
         sessionStorage.setItem("rosto", JSON.stringify(fileData.content));
         if (sessionStorage.getItem("rostoDepois")) {
           sessionStorage.removeItem("rostoDepois");
-        }co
+        }
       };
       reader.readAsDataURL(file);
       select("anexo Rosto")
