@@ -10,6 +10,14 @@ import ModalCustom from "$store/components/ui/ModalCustom.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 
+export interface TratamentoLente {
+  /**
+   * @title Tratamento Lente
+   */
+  label: string;
+  imagem?: ImageWidget;
+}
+
 export interface TecnologiaLente {
   /**
    * @title Tipo de Tecnologia
@@ -17,6 +25,7 @@ export interface TecnologiaLente {
   label: string;
   imagem?: ImageWidget;
   descricao?: string;
+  tratamentoLente?: TratamentoLente[];
 }
 
 export interface ImagemRosto {
@@ -394,13 +403,15 @@ function ModalCategoryTec(
 }
 
 function ModalCategoryTrat(
-  { lentes, select, selecaoIndex, selecaoCliente }: {
+  { lentes, select, selecaoIndex, selecaoCliente, informacoes }: {
     lentes: string[] | Lente[];
     select: (categoria: string) => void;
     selecaoIndex: number;
     selecaoCliente: string;
+    informacoes: Object[];
   },
 ) {
+
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-4">
@@ -432,65 +443,110 @@ function ModalCategoryTrat(
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
-        {lentes.map((lente) => (
-          <div
-            className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
-              lente?.categorias[selecaoIndex] === selecaoCliente
-                ? "border-4 border-[#119184]"
-                : "border border-[#D0D0D0]"
-            }`}
-            onClick={() => select(lente?.categorias[selecaoIndex])}
-          >
-            <div class="font-bold text-[#119184] uppercase text-xl text-center">
-              {lente.categorias[selecaoIndex]}
-            </div>
+        {lentes.map((lente) => {
 
-            <div class="font-bold text-center">
-              {formatPrice(
-                lente.price,
-                "BRL",
-                "pt-BR",
+          const informacoesFiltradas = informacoes.filter((item) =>
+            item?.label === lente?.categorias[0]
+          ).map((item) =>
+            item?.tecnologiaLente?.find((elemento) =>
+              elemento?.label === lente?.categorias[1]
+            )
+          ).filter((item) => item);
+
+          return (
+            <div
+              className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
+                lente?.categorias[selecaoIndex] === selecaoCliente
+                  ? "border-4 border-[#119184]"
+                  : "border border-[#D0D0D0]"
+              }`}
+              onClick={() => select(lente?.categorias[selecaoIndex])}
+            >
+              {informacoesFiltradas.map((info, i) => (
+                <>
+                  {info?.tratamentoLente && info.tratamentoLente.map((tratamento, index) => {
+                    if (tratamento.label === lente?.categorias[selecaoIndex]) {
+                      if (tratamento?.imagem) {
+                        return (
+                          <Image
+                            className={`group-disabled:border-base-300 w-full rounded-lg ${
+                              lente?.categorias[selecaoIndex] != selecaoCliente && selecaoCliente != ""
+                                ? "grayscale"
+                                : ""
+                            }`}
+                            width={250}
+                            height={160}
+                            src={tratamento?.imagem}
+                            alt={lente?.categorias[selecaoIndex]}
+                          />
+                        );
+                      }
+                    }
+                  })}
+                </>
+              ))}
+
+
+              <div class="font-bold text-[#119184] uppercase text-xl text-center">
+                {lente?.categorias[selecaoIndex]}
+              </div>
+
+              {lente?.descricao && (
+                <div class="text-center font-medium text-sm">
+                  <div>
+                    {lente?.descricao}
+                  </div>
+                </div>
               )}
-            </div>
+              
 
-            {lente?.categorias[selecaoIndex] === selecaoCliente
-              ? (
-                <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
-                  <svg
-                    class="w-5 md:w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                  >
-                    <g clip-path="url(#clip0_156_3614)">
-                      <path
-                        d="M12.25 2.72998C10.3216 2.72998 8.43657 3.30181 6.83319 4.37315C5.22982 5.4445 3.98013 6.96724 3.24218 8.74882C2.50422 10.5304 2.31114 12.4908 2.68735 14.3821C3.06355 16.2734 3.99215 18.0107 5.35571 19.3743C6.71928 20.7378 8.45656 21.6664 10.3479 22.0426C12.2392 22.4188 14.1996 22.2258 15.9812 21.4878C17.7627 20.7499 19.2855 19.5002 20.3568 17.8968C21.4282 16.2934 22 14.4083 22 12.48C21.9973 9.89496 20.9692 7.41659 19.1413 5.5887C17.3134 3.76082 14.835 2.73271 12.25 2.72998ZM16.5306 10.7606L11.2806 16.0106C11.211 16.0803 11.1283 16.1357 11.0372 16.1734C10.9462 16.2111 10.8486 16.2306 10.75 16.2306C10.6514 16.2306 10.5538 16.2111 10.4628 16.1734C10.3718 16.1357 10.289 16.0803 10.2194 16.0106L7.96938 13.7606C7.82865 13.6199 7.74959 13.429 7.74959 13.23C7.74959 13.031 7.82865 12.8401 7.96938 12.6994C8.11011 12.5586 8.30098 12.4796 8.5 12.4796C8.69903 12.4796 8.8899 12.5586 9.03063 12.6994L10.75 14.4197L15.4694 9.69936C15.5391 9.62967 15.6218 9.5744 15.7128 9.53668C15.8039 9.49897 15.9015 9.47956 16 9.47956C16.0986 9.47956 16.1961 9.49897 16.2872 9.53668C16.3782 9.5744 16.4609 9.62967 16.5306 9.69936C16.6003 9.76904 16.6556 9.85176 16.6933 9.94281C16.731 10.0339 16.7504 10.1314 16.7504 10.23C16.7504 10.3285 16.731 10.4261 16.6933 10.5172C16.6556 10.6082 16.6003 10.6909 16.5306 10.7606Z"
-                        fill="white"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_156_3614">
-                        <rect
-                          width="24"
-                          height="24"
+              <div class="font-bold text-center">
+                {formatPrice(
+                  lente.price,
+                  "BRL",
+                  "pt-BR",
+                )}
+              </div>
+
+              {lente?.categorias[selecaoIndex] === selecaoCliente
+                ? (
+                  <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
+                    <svg
+                      class="w-5 md:w-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      viewBox="0 0 25 25"
+                      fill="none"
+                    >
+                      <g clip-path="url(#clip0_156_3614)">
+                        <path
+                          d="M12.25 2.72998C10.3216 2.72998 8.43657 3.30181 6.83319 4.37315C5.22982 5.4445 3.98013 6.96724 3.24218 8.74882C2.50422 10.5304 2.31114 12.4908 2.68735 14.3821C3.06355 16.2734 3.99215 18.0107 5.35571 19.3743C6.71928 20.7378 8.45656 21.6664 10.3479 22.0426C12.2392 22.4188 14.1996 22.2258 15.9812 21.4878C17.7627 20.7499 19.2855 19.5002 20.3568 17.8968C21.4282 16.2934 22 14.4083 22 12.48C21.9973 9.89496 20.9692 7.41659 19.1413 5.5887C17.3134 3.76082 14.835 2.73271 12.25 2.72998ZM16.5306 10.7606L11.2806 16.0106C11.211 16.0803 11.1283 16.1357 11.0372 16.1734C10.9462 16.2111 10.8486 16.2306 10.75 16.2306C10.6514 16.2306 10.5538 16.2111 10.4628 16.1734C10.3718 16.1357 10.289 16.0803 10.2194 16.0106L7.96938 13.7606C7.82865 13.6199 7.74959 13.429 7.74959 13.23C7.74959 13.031 7.82865 12.8401 7.96938 12.6994C8.11011 12.5586 8.30098 12.4796 8.5 12.4796C8.69903 12.4796 8.8899 12.5586 9.03063 12.6994L10.75 14.4197L15.4694 9.69936C15.5391 9.62967 15.6218 9.5744 15.7128 9.53668C15.8039 9.49897 15.9015 9.47956 16 9.47956C16.0986 9.47956 16.1961 9.49897 16.2872 9.53668C16.3782 9.5744 16.4609 9.62967 16.5306 9.69936C16.6003 9.76904 16.6556 9.85176 16.6933 9.94281C16.731 10.0339 16.7504 10.1314 16.7504 10.23C16.7504 10.3285 16.731 10.4261 16.6933 10.5172C16.6556 10.6082 16.6003 10.6909 16.5306 10.7606Z"
                           fill="white"
-                          transform="translate(0.25 0.47998)"
                         />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  Selecionado
-                </div>
-              )
-              : (
-                <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
-                  Quero este
-                </div>
-              )}
-          </div>
-        ))}
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_156_3614">
+                          <rect
+                            width="24"
+                            height="24"
+                            fill="white"
+                            transform="translate(0.25 0.47998)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    Selecionado
+                  </div>
+                )
+                : (
+                  <div class="btn uppercase font-semibold bg-[#696969] rounded-[200px] text-white hover:bg-secondary h-10 min-h-10 md:min-h-12 md:h-12 text-xs md:text-sm px-2.5">
+                    Quero este
+                  </div>
+                )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -516,9 +572,14 @@ function ModalCategoryReceita(
           content: fileContent,
         };
         sessionStorage.setItem("receita", JSON.stringify(fileData.content));
+        
+        if (sessionStorage.getItem("receitaDepois")) {
+          sessionStorage.removeItem("receitaDepois");
+        }
+        
       };
       reader.readAsDataURL(file);
-      select("")
+      select("anexo Receita")
     }
   }; 
 
@@ -551,6 +612,24 @@ function ModalCategoryReceita(
         </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
+        {selecaoCliente == "anexo Receita" ? (
+          <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+            <g clip-path="url(#clip0_150_13359)">
+            <path d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.625 4.38623V10.5112H22.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.375 17.5112H16.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 14.8862V20.1362" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_150_13359">
+            <rect width="28" height="28" fill="white" transform="translate(0 0.88623)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            <span>ARQUIVO ANEXADO</span>
+          </div>
+        ):(
           <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
             <svg
               width="24"
@@ -581,6 +660,8 @@ function ModalCategoryReceita(
             </svg>
             <span>ANEXAR ARQUIVO</span>
           </div>
+        )}
+         
           <input
             type="file"
             onChange={handleFileChange}
@@ -627,12 +708,21 @@ function ModalCategoryReceita(
           </div>
 
           <div class="flex gap-2 cursor-pointer items-center">
-            <input
-              type="checkbox"
-              id="envioreceita"
-              onClick={() => select("")}
-              class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
-            />
+            {selecaoCliente == "receita Depois" ? (
+              <input
+                type="checkbox"
+                id="envioreceita"
+                onClick={() => select("receita Depois")}
+                class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
+              />
+            ):(
+              <input
+                type="checkbox"
+                id="envioreceita"
+                onClick={() => select("receita Depois")}
+                class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
+              />
+            )}
             <label for="envioreceita" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
@@ -664,9 +754,12 @@ function ModalCategoryRosto(
           content: fileContent,
         };
         sessionStorage.setItem("rosto", JSON.stringify(fileData.content));
+        if (sessionStorage.getItem("rostoDepois")) {
+          sessionStorage.removeItem("rostoDepois");
+        }co
       };
       reader.readAsDataURL(file);
-      select("")
+      select("anexo Rosto")
     }
   };
 
@@ -714,6 +807,24 @@ function ModalCategoryRosto(
         </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
+        {selecaoCliente == "anexo Rosto" ? (
+          <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+            <g clip-path="url(#clip0_150_13359)">
+            <path d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16.625 4.38623V10.5112H22.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.375 17.5112H16.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 14.8862V20.1362" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_150_13359">
+            <rect width="28" height="28" fill="white" transform="translate(0 0.88623)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            <span>ARQUIVO ANEXADO</span>
+          </div>
+        ):(
           <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
             <svg
               width="24"
@@ -744,7 +855,9 @@ function ModalCategoryRosto(
             </svg>
             <span>ANEXAR ARQUIVO</span>
           </div>
-          <input type="file" id="imgReceita" accept=".jpg,.jpeg,.png" class="h-12 opacity-0 cursor-pointer" onChange={handleFileChange} />
+        )}
+          
+          <input type="file" id="imgRosto" accept=".jpg,.jpeg,.png" class="h-12 opacity-0 cursor-pointer" onChange={handleFileChange} />
           <div class="text-sm mt-2 block">Apenas arquivos no formato PDF ou JPG.</div>
         </div>
 
@@ -780,14 +893,24 @@ function ModalCategoryRosto(
             Mas, lembre-se de{" "}
             <span class="font-bold text-xs md:text-base">incluir o número do pedido!</span>
           </div>
-
           <div class="flex gap-2 cursor-pointer items-center">
-            <input
-              type="checkbox"
-              id="enviorosto"
-              onClick={() => select("")} 
-              class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
-            />
+             {selecaoCliente == "rosto Depois" ? (
+              <input
+                type="checkbox"
+                id="envioreceita"
+                onClick={() => select("receita Depois")}
+                class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
+              />
+             ): (
+              <input
+                type="checkbox"
+                id="enviorosto"
+                onClick={() => select("rosto Depois")} 
+                class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
+              />
+
+             )}
+            
             <label for="enviorosto" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
@@ -902,6 +1025,20 @@ export default function ModalLentes(
   };
 
   const adicionarSelecao = (selecao: string) => {
+    if(selecao == 'receita Depois'){
+      if (sessionStorage.getItem("receita")) {
+        sessionStorage.removeItem("receita");
+        sessionStorage.setItem("receitaDepois", "Receita será enviada mais tarde");
+      }
+    }
+
+    if(selecao == 'rosto Depois'){
+      if (sessionStorage.getItem("rosto")) {
+        sessionStorage.removeItem("rosto");
+        sessionStorage.setItem("rostoDepois", "Foto do rosto será enviada mais tarde");
+      }
+    }
+
     const array = selecaoDoCliente.value;
     selecaoDoCliente.value = [...array.slice(0, activeTabIndex.value), selecao];
     proximo();
@@ -960,13 +1097,16 @@ export default function ModalLentes(
       )?.value;
       if (!propCategorias) return null;
       const categorias = propCategorias.split(", ");
-
+      const descricaoTratamento = p.isVariantOf?.additionalProperty.find((prop) =>
+        prop?.name === "Descrição - Tratamento (Modal)"
+      )?.value;
       return {
         categorias,
         nome: p?.name || "",
         sku: p?.sku || "",
         image: p?.image?.[0]?.url || "",
         price: p?.offers?.lowPrice || 0,
+        descricao: descricaoTratamento,
       };
     }).filter(Boolean);
   });
@@ -1048,6 +1188,7 @@ export default function ModalLentes(
         lentes={elementsToRender.value}
         select={adicionarSelecao}
         selecaoIndex={activeTabIndex.value}
+        informacoes={informacoesModal}
         selecaoCliente={selecaoDoCliente?.value[2]}
       />
     ),
@@ -1060,7 +1201,8 @@ export default function ModalLentes(
     seuRosto: (
       <ModalCategoryRosto
         selecaoCliente={selecaoDoCliente?.value[4]}
-        select={addToCart} 
+        /*select={addToCart} */
+        select={adicionarSelecao}
       />
     ),
   };
@@ -1207,7 +1349,7 @@ export default function ModalLentes(
                     </div>
                   ) : ("")}
               </div>
-              <div class="bg-white md:bg-[#F8F8F8] rounded-b-2xl pt-0 pb-7 md:py-7 px-4 md:px-8">
+              <div class="bg-white md:bg-[#F8F8F8] rounded-b-2xl pt-0 pb-16 md:pb-7 md:py-7 px-4 md:px-8">
                 {categories[activeTab]}
               </div>
             </div>
