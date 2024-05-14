@@ -897,8 +897,8 @@ function ModalCategoryRosto(
              {selecaoCliente == "rosto Depois" ? (
               <input
                 type="checkbox"
-                id="envioreceita"
-                onClick={() => select("receita Depois")}
+                id="enviorosto"
+                onClick={() => select("rosto Depois")}
                 class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
               />
              ): (
@@ -1028,15 +1028,15 @@ export default function ModalLentes(
     if(selecao == 'receita Depois'){
       if (sessionStorage.getItem("receita")) {
         sessionStorage.removeItem("receita");
-        sessionStorage.setItem("receitaDepois", "Receita será enviada mais tarde");
       }
+      sessionStorage.setItem("receitaDepois", "Receita será enviada mais tarde");
     }
 
     if(selecao == 'rosto Depois'){
       if (sessionStorage.getItem("rosto")) {
         sessionStorage.removeItem("rosto");
-        sessionStorage.setItem("rostoDepois", "Foto do rosto será enviada mais tarde");
       }
+      sessionStorage.setItem("rostoDepois", "Foto do rosto será enviada mais tarde");
     }
 
     const array = selecaoDoCliente.value;
