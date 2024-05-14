@@ -75,7 +75,7 @@ export default function GallerySlider(props: Props) {
           <ProductImageZoom
             images={images}
             width={700}
-            height={Math.trunc(700 * height / width)}
+            height={700}
           />
         </div>
       </div>

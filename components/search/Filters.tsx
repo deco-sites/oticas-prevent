@@ -1,4 +1,5 @@
 import Avatar from "$store/components/ui/Avatar.tsx";
+import AvatarSize from "$store/components/ui/AvatarSize.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import type {
   Filter,
@@ -19,7 +20,7 @@ function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
+    <a href={url} rel="nofollow" class="flex items-center gap-2 w-full">
       <div aria-checked={selected} class="checkbox" />
       <span class="text-sm">{label}</span>
       {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>}
@@ -34,10 +35,11 @@ function FilterValues({ key, values }: FilterToggle) {
 
   return (
     <ul class={`flex flex-wrap gap-2 ${flexDirection}`}>
+      
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
-
-        if (key === "cor" || key === "tamanho") {
+        /*
+        if (key === "cor") {
           return (
             <a href={url} rel="nofollow">
               <Avatar
@@ -45,6 +47,16 @@ function FilterValues({ key, values }: FilterToggle) {
                 variant={selected ? "active" : "default"}
               />
             </a>
+          );
+        }
+*/
+        if (key === "tamanho") {
+          return (
+              <AvatarSize
+                content={value}
+                variant={selected ? "active" : "default"}
+                link={url}
+              />
           );
         }
 
