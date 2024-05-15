@@ -1,11 +1,13 @@
 import type { Platform } from "$store/apps/site.ts";
 import { SendEventOnClick } from "$store/components/Analytics.tsx";
 import Avatar from "$store/components/ui/Avatar.tsx";
+import AvatarImg from "$store/components/ui/AvatarImg.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
+import { useVariantPossiblitiesCustomImage } from "$store/sdk/useVariantPossiblitiesCustomImage.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -75,6 +77,10 @@ function ProductCard({
   const [front, back] = images ?? [];
   const { listPrice, price, installments } = useOffer(offers);
   const possibilities = useVariantPossibilities(hasVariant, product);
+  const variantPossibilities = useVariantPossiblitiesCustomImage(
+    hasVariant,
+    product,
+  );
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
   const l = layout;
@@ -100,6 +106,39 @@ function ProductCard({
       </li>
     );
   });
+
+  const skuSelectorImg = Object.keys(variantPossibilities).map((name) => {
+    if (Object.prototype.hasOwnProperty.call(variantPossibilities, name)) {
+      const items = variantPossibilities[name];
+      return (
+        <>
+          {Object.keys(items).map((itemName) => {
+            const item = items[itemName];
+            const relativeUrl = relative(url);
+            const relativeLink = relative(item.url);
+            console.log(item);
+            return (
+              <li>
+                <a href={relativeLink}>
+                  <AvatarImg
+                    content={itemName}
+                    variant={relativeLink === relativeUrl
+                      ? "active"
+                      : relativeLink
+                      ? "default"
+                      : "disabled"}
+                    img={item.imageUrl}
+                  />
+                </a>
+              </li>
+            );
+          })}
+        </>
+      );
+    }
+    return null;
+  });
+
   const cta = (
     <a
       href={url && relative(url)}
@@ -161,12 +200,14 @@ function ProductCard({
               l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
             }`}
           >
-            {/*platform === "vtex" && (
+            {
+              /*platform === "vtex" && (
               <WishlistButtonVtex
                 productGroupID={productGroupID}
                 productID={productID}
               />
-            )*/}
+            )*/
+            }
             {platform === "wake" && (
               <WishlistButtonWake
                 productGroupID={productGroupID}
@@ -233,7 +274,8 @@ function ProductCard({
           {/* SKU Selector */}
           {l?.onMouseOver?.showSkuSelector && (
             <ul class="flex justify-center items-center gap-2 w-full">
-              {skuSelector}
+              {/*skuSelector*/}
+              {skuSelectorImg}
             </ul>
           )}
           {l?.onMouseOver?.showCta && cta}
@@ -255,7 +297,8 @@ function ProductCard({
                     align === "center" ? "justify-center" : "justify-start"
                   } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
                 >
-                  {skuSelector}
+                  {/*skuSelector*/}
+                  {skuSelectorImg}
                 </ul>
               )}
           </>
@@ -302,18 +345,20 @@ function ProductCard({
                     : ""
                 } ${align === "center" ? "justify-center" : "justify-end"}`}
               >
-                { listPrice != price ? (
-                  <div
-                    class={`line-through text-base-300 text-xs font-light ${
-                      l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                    }`}
-                  >
-                    {formatPrice(listPrice, offers?.priceCurrency)}
-                  </div>
-                ) : (
-                  ""
-                )}
-                
+                {listPrice != price
+                  ? (
+                    <div
+                      class={`line-through text-base-300 text-xs font-light ${
+                        l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
+                      }`}
+                    >
+                      {formatPrice(listPrice, offers?.priceCurrency)}
+                    </div>
+                  )
+                  : (
+                    ""
+                  )}
+
                 <div class="text-base-content lg:text-sm font-light">
                   {formatPrice(price, offers?.priceCurrency)}
                 </div>

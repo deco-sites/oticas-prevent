@@ -35,10 +35,9 @@ function FilterValues({ key, values }: FilterToggle) {
 
   return (
     <ul class={`flex flex-wrap gap-2 ${flexDirection}`}>
-      
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
-        /*
+
         if (key === "cor") {
           return (
             <a href={url} rel="nofollow">
@@ -49,14 +48,14 @@ function FilterValues({ key, values }: FilterToggle) {
             </a>
           );
         }
-*/
+
         if (key === "tamanho") {
           return (
-              <AvatarSize
-                content={value}
-                variant={selected ? "active" : "default"}
-                link={url}
-              />
+            <AvatarSize
+              content={value}
+              variant={selected ? "active" : "default"}
+              link={url}
+            />
           );
         }
 

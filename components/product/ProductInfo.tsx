@@ -17,6 +17,7 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import ProductSelectorCustom from "./ProductVariantSelectorCustomImage.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import AddToCartButtonModalLente from "$store/components/product/ModalLente/AddToCartButtonModalLente.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -28,7 +29,6 @@ export interface ImagemMedidaArmacao {
    */
   imagem?: ImageWidget;
 }
-
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -42,8 +42,6 @@ interface Props {
     name?: "concat" | "productGroup" | "product";
   };
 }
-
-
 
 function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
   const platform = usePlatform();
@@ -83,11 +81,9 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
     prop?.name === "Medida da Ponte"
   )?.value;
 
-  const productComprimentoHastes = isVariantOf?.additionalProperty.find((prop) =>
-    prop?.name === "Comprimento das Hastes"
-  )?.value;
-
- 
+  const productComprimentoHastes = isVariantOf?.additionalProperty.find((
+    prop,
+  ) => prop?.name === "Comprimento das Hastes")?.value;
 
   const {
     price = 0,
@@ -111,13 +107,13 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
   });
 
   const productName = layout?.name === "concat"
-  ? `${isVariantOf?.name} ${name}`
-  : layout?.name === "productGroup"
-  ? isVariantOf?.name
-  : name ;
+    ? `${isVariantOf?.name} ${name}`
+    : layout?.name === "productGroup"
+    ? isVariantOf?.name
+    : name;
 
   const { displayModal } = useUI();
-  
+
   return (
     <div class="flex flex-col px-2.5" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
@@ -152,7 +148,7 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
-        <ProductSelector product={product} />
+        <ProductSelectorCustom product={product} />
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
@@ -161,24 +157,24 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
             <>
               {platform === "vtex" && (
                 <>
-                  {productName?.includes("Óculos de Grau") || productName?.includes("Óculos de grau") ? (
-                    <AddToCartButtonModalLente/>
-                  ) : (
-                    <AddToCartButtonVTEX
-                      eventParams={{ items: [eventItem] }}
-                      productID={productID}
-                      seller={seller}
-                    />
-                  )}
-                  
-                  <div  class="hidden">
+                  {productName?.includes("Óculos de Grau") ||
+                      productName?.includes("Óculos de grau")
+                    ? <AddToCartButtonModalLente />
+                    : (
+                      <AddToCartButtonVTEX
+                        eventParams={{ items: [eventItem] }}
+                        productID={productID}
+                        seller={seller}
+                      />
+                    )}
+
+                  <div class="hidden">
                     <WishlistButtonVtex
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
+                      variant="full"
+                      productID={productID}
+                      productGroupID={productGroupID}
                     />
                   </div>
-                 
                 </>
               )}
               {platform === "wake" && (
@@ -252,7 +248,6 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
             </details>
           )}
 
-          
           <figure>
             <Image
               class="w-full"
@@ -262,7 +257,6 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
               loading="lazy"
             />
           </figure>
-       
         </span>
       </div>
 
@@ -270,38 +264,43 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
       <div class="text-sm">
         {productFormato && (
           <div>
-            <span class="font-bold">Formato dos Óculos:</span> <span>{productFormato}</span>
+            <span class="font-bold">Formato dos Óculos:</span>{" "}
+            <span>{productFormato}</span>
           </div>
         )}
         {productTamanho && (
           <div>
-            <span class="font-bold">Tamanho:</span> <span>{productTamanho}</span>
+            <span class="font-bold">Tamanho:</span>{" "}
+            <span>{productTamanho}</span>
           </div>
         )}
         {productMaterial && (
           <div>
-            <span class="font-bold">Material:</span> <span>{productMaterial}</span> 
+            <span class="font-bold">Material:</span>{" "}
+            <span>{productMaterial}</span>
           </div>
         )}
-        
+
         {productAro && (
           <div>
-            <span class="font-bold">Aro ( largura das lentes):</span> <span>{productAro}</span>
+            <span class="font-bold">Aro ( largura das lentes):</span>{" "}
+            <span>{productAro}</span>
           </div>
         )}
-        
+
         {productMedidaPonte && (
           <div>
-            <span class="font-bold">Medida da Ponte:</span> <span>{productMedidaPonte}</span>
+            <span class="font-bold">Medida da Ponte:</span>{" "}
+            <span>{productMedidaPonte}</span>
           </div>
         )}
-       
+
         {productComprimentoHastes && (
           <div>
-            <span class="font-bold">Comprimento das Hastes:</span> <span>{productComprimentoHastes}</span>
+            <span class="font-bold">Comprimento das Hastes:</span>{" "}
+            <span>{productComprimentoHastes}</span>
           </div>
         )}
-        
       </div>
       {/* Analytics Event */}
       <SendEventOnView
