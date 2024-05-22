@@ -116,7 +116,7 @@ function ProductCard({
             const item = items[itemName];
             const relativeUrl = relative(url);
             const relativeLink = relative(item.url);
-            console.log(item);
+            //console.log(item);
             return (
               <li>
                 <a href={relativeLink}>

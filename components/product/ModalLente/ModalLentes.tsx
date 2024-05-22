@@ -90,31 +90,50 @@ function ModalTab(
         active
           ? "bg-[#119184] text-white md:text-black md:bg-[#F8F8F8] relative md:before:content[''] md:before:absolute md:before:w-full md:before:h-4 md:before:bg-[#F8F8F8] md:before:top-[-9px] md:before:rounded-t-2xl md:before:block"
           : "bg-white border border-[#D0D0D0] md:bg-[#D7F2EF] md:border-0"
-      } ${index == 0 && !active ? "rounded-full md:rounded-none md:rounded-tl-2xl" : "rounded-full md:rounded-none"} ${
-        index == 4 && !active ? "rounded-full md:rounded-none md:rounded-tr-2xl" : "rounded-full md:rounded-none"
+      } ${
+        index == 0 && !active
+          ? "rounded-full md:rounded-none md:rounded-tl-2xl"
+          : "rounded-full md:rounded-none"
+      } ${
+        index == 4 && !active
+          ? "rounded-full md:rounded-none md:rounded-tr-2xl"
+          : "rounded-full md:rounded-none"
       } text-center font-bold text-sm md:text-base cursor-pointer rounded-tl-2x w-7 h-7 md:w-auto md:h-auto`}
     >
       <span class="hidden md:block">
         {text}
       </span>
 
-      {selecaoClienteSize >= (index + 1) ? 
-      (
-        <span class="flex justify-center md:hidden rounded-full bg-white w-fit m-auto p-px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.0001 0.25C8.07176 0.25 6.1867 0.821828 4.58332 1.89317C2.97994 2.96451 1.73026 4.48726 0.992301 6.26884C0.254347 8.05042 0.0612641 10.0108 0.43747 11.9021C0.813676 13.7934 1.74227 15.5307 3.10584 16.8943C4.4694 18.2579 6.20668 19.1865 8.098 19.5627C9.98931 19.9389 11.9497 19.7458 13.7313 19.0078C15.5129 18.2699 17.0356 17.0202 18.107 15.4168C19.1783 13.8134 19.7501 11.9284 19.7501 10C19.7474 7.41498 18.7193 4.93661 16.8914 3.10872C15.0635 1.28084 12.5851 0.25273 10.0001 0.25ZM14.2808 8.28063L9.03075 13.5306C8.9611 13.6004 8.87838 13.6557 8.78733 13.6934C8.69628 13.7312 8.59869 13.7506 8.50013 13.7506C8.40156 13.7506 8.30397 13.7312 8.21292 13.6934C8.12187 13.6557 8.03916 13.6004 7.9695 13.5306L5.7195 11.2806C5.57877 11.1399 5.49971 10.949 5.49971 10.75C5.49971 10.551 5.57877 10.3601 5.7195 10.2194C5.86023 10.0786 6.0511 9.99958 6.25013 9.99958C6.44915 9.99958 6.64002 10.0786 6.78075 10.2194L8.50013 11.9397L13.2195 7.21937C13.2892 7.14969 13.3719 7.09442 13.463 7.0567C13.554 7.01899 13.6516 6.99958 13.7501 6.99958C13.8487 6.99958 13.9463 7.01899 14.0373 7.0567C14.1283 7.09442 14.2111 7.14969 14.2808 7.21937C14.3504 7.28906 14.4057 7.37178 14.4434 7.46283C14.4811 7.55387 14.5005 7.65145 14.5005 7.75C14.5005 7.84855 14.4811 7.94613 14.4434 8.03717C14.4057 8.12822 14.3504 8.21094 14.2808 8.28063Z" fill="#2F9B3E"/>
-          </svg>
-        </span>
-      ) : (
-        <span class="block md:hidden">
-        {text === "Tipo" ? "1" :
-          text === "Tecnologia" ? "2" :
-          text === "Tratamento" ? "3" :
-          text === "Receita" ? "4" : "5"}
-  
-        </span>
-      )}
-     
+      {selecaoClienteSize >= (index + 1)
+        ? (
+          <span class="flex justify-center md:hidden rounded-full bg-white w-fit m-auto p-px">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.0001 0.25C8.07176 0.25 6.1867 0.821828 4.58332 1.89317C2.97994 2.96451 1.73026 4.48726 0.992301 6.26884C0.254347 8.05042 0.0612641 10.0108 0.43747 11.9021C0.813676 13.7934 1.74227 15.5307 3.10584 16.8943C4.4694 18.2579 6.20668 19.1865 8.098 19.5627C9.98931 19.9389 11.9497 19.7458 13.7313 19.0078C15.5129 18.2699 17.0356 17.0202 18.107 15.4168C19.1783 13.8134 19.7501 11.9284 19.7501 10C19.7474 7.41498 18.7193 4.93661 16.8914 3.10872C15.0635 1.28084 12.5851 0.25273 10.0001 0.25ZM14.2808 8.28063L9.03075 13.5306C8.9611 13.6004 8.87838 13.6557 8.78733 13.6934C8.69628 13.7312 8.59869 13.7506 8.50013 13.7506C8.40156 13.7506 8.30397 13.7312 8.21292 13.6934C8.12187 13.6557 8.03916 13.6004 7.9695 13.5306L5.7195 11.2806C5.57877 11.1399 5.49971 10.949 5.49971 10.75C5.49971 10.551 5.57877 10.3601 5.7195 10.2194C5.86023 10.0786 6.0511 9.99958 6.25013 9.99958C6.44915 9.99958 6.64002 10.0786 6.78075 10.2194L8.50013 11.9397L13.2195 7.21937C13.2892 7.14969 13.3719 7.09442 13.463 7.0567C13.554 7.01899 13.6516 6.99958 13.7501 6.99958C13.8487 6.99958 13.9463 7.01899 14.0373 7.0567C14.1283 7.09442 14.2111 7.14969 14.2808 7.21937C14.3504 7.28906 14.4057 7.37178 14.4434 7.46283C14.4811 7.55387 14.5005 7.65145 14.5005 7.75C14.5005 7.84855 14.4811 7.94613 14.4434 8.03717C14.4057 8.12822 14.3504 8.21094 14.2808 8.28063Z"
+                fill="#2F9B3E"
+              />
+            </svg>
+          </span>
+        )
+        : (
+          <span class="block md:hidden">
+            {text === "Tipo"
+              ? "1"
+              : text === "Tecnologia"
+              ? "2"
+              : text === "Tratamento"
+              ? "3"
+              : text === "Receita"
+              ? "4"
+              : "5"}
+          </span>
+        )}
     </button>
   );
 }
@@ -140,7 +159,7 @@ function ModalCategoryType(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou: </span>{" "}
+                <span class="uppercase">Você selecionou:</span>{" "}
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -165,19 +184,22 @@ function ModalCategoryType(
       </div>
 
       <div class="grid grid-cols-2 gap-1 md:gap-4 sm:grid-cols-4">
-          
         {categorias.map((categoria, index) => (
-          
           <div
             className={`p-3 md:p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-between gap-2.5 md:gap-3 ${
               categoria === selecaoCliente
                 ? "border-4 border-[#119184]"
                 : "border border-[#D0D0D0]"
             } ${
-              categoria === "Grau" ? "order-1" :
-              categoria === "Grau Alto" ? "order-2" :
-              categoria === "Multifocal" ? "order-3" :
-              categoria === "Linha Premium" ? "order-4" : "order-5"
+              categoria === "Grau"
+                ? "order-1"
+                : categoria === "Grau Alto"
+                ? "order-2"
+                : categoria === "Multifocal"
+                ? "order-3"
+                : categoria === "Linha Premium"
+                ? "order-4"
+                : "order-5"
             }`}
             onClick={() => select(categoria)}
           >
@@ -266,7 +288,7 @@ function ModalCategoryTec(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou: </span>
+                <span class="uppercase">Você selecionou:</span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -284,7 +306,7 @@ function ModalCategoryTec(
           )}
         <div class="text-center text-sm md:text-xl font-medium">
           <p>
-            Escolha a <span class="font-bold">tecnologia das lentes </span>
+            Escolha a <span class="font-bold">tecnologia das lentes</span>
             para prosseguir:
           </p>
         </div>
@@ -314,29 +336,28 @@ function ModalCategoryTec(
                 {informacoesFiltradas.map((info, i) => (
                   <>
                     {info?.tecnologiaLente.map((tecnologia, index) => {
-                     
                       if (tecnologia.label === categoriaAtual) {
-                        if(tecnologia?.imagem){
+                        if (tecnologia?.imagem) {
                           return (
                             <Image
-                            className={`group-disabled:border-base-300 w-full rounded-lg ${
-                              categoriaAtual != selecaoCliente && selecaoCliente != ""
-                                ? "grayscale"
-                                : ""
-                            }`}
-                            width={250}
-                            height={160}
-                            src={tecnologia?.imagem}
-                            alt={categoriaAtual}
-                          />
+                              className={`group-disabled:border-base-300 w-full rounded-lg ${
+                                categoriaAtual != selecaoCliente &&
+                                  selecaoCliente != ""
+                                  ? "grayscale"
+                                  : ""
+                              }`}
+                              width={250}
+                              height={160}
+                              src={tecnologia?.imagem}
+                              alt={categoriaAtual}
+                            />
                           );
                         }
-                        
                       }
                     })}
                   </>
                 ))}
-                
+
                 <div class="font-bold text-[#119184] uppercase text-xl text-center">
                   {categoriaAtual}
                 </div>
@@ -411,7 +432,6 @@ function ModalCategoryTrat(
     informacoes: Object[];
   },
 ) {
-
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-4">
@@ -419,7 +439,7 @@ function ModalCategoryTrat(
           ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
-                <span class="uppercase">Você selecionou: </span>
+                <span class="uppercase">Você selecionou:</span>
                 <span class="font-bold text-base">{selecaoCliente}</span>
               </p>
             </div>
@@ -437,14 +457,13 @@ function ModalCategoryTrat(
           )}
         <div class="text-center text-sm md:text-xl font-medium">
           <p>
-            Escolha o <span class="font-bold">tratamento das lentes  </span>
+            Escolha o <span class="font-bold">tratamento das lentes</span>
             para prosseguir:
           </p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4">
         {lentes.map((lente) => {
-
           const informacoesFiltradas = informacoes.filter((item) =>
             item?.label === lente?.categorias[0]
           ).map((item) =>
@@ -464,28 +483,31 @@ function ModalCategoryTrat(
             >
               {informacoesFiltradas.map((info, i) => (
                 <>
-                  {info?.tratamentoLente && info.tratamentoLente.map((tratamento, index) => {
-                    if (tratamento.label === lente?.categorias[selecaoIndex]) {
-                      if (tratamento?.imagem) {
-                        return (
-                          <Image
-                            className={`group-disabled:border-base-300 w-full rounded-lg ${
-                              lente?.categorias[selecaoIndex] != selecaoCliente && selecaoCliente != ""
-                                ? "grayscale"
-                                : ""
-                            }`}
-                            width={250}
-                            height={160}
-                            src={tratamento?.imagem}
-                            alt={lente?.categorias[selecaoIndex]}
-                          />
-                        );
+                  {info?.tratamentoLente &&
+                    info.tratamentoLente.map((tratamento, index) => {
+                      if (
+                        tratamento.label === lente?.categorias[selecaoIndex]
+                      ) {
+                        if (tratamento?.imagem) {
+                          return (
+                            <Image
+                              className={`group-disabled:border-base-300 w-full rounded-lg ${
+                                lente?.categorias[selecaoIndex] !=
+                                    selecaoCliente && selecaoCliente != ""
+                                  ? "grayscale"
+                                  : ""
+                              }`}
+                              width={250}
+                              height={160}
+                              src={tratamento?.imagem}
+                              alt={lente?.categorias[selecaoIndex]}
+                            />
+                          );
+                        }
                       }
-                    }
-                  })}
+                    })}
                 </>
               ))}
-
 
               <div class="font-bold text-[#119184] uppercase text-xl text-center">
                 {lente?.categorias[selecaoIndex]}
@@ -498,7 +520,6 @@ function ModalCategoryTrat(
                   </div>
                 </div>
               )}
-              
 
               <div class="font-bold text-center">
                 {formatPrice(
@@ -557,7 +578,7 @@ function ModalCategoryReceita(
     selecaoCliente: string;
     select: (categoria: string) => void;
   },
-) {  
+) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event?.target?.files;
     if (files && files?.length > 0) {
@@ -565,29 +586,28 @@ function ModalCategoryReceita(
       const reader = new FileReader();
       reader.onload = (event) => {
         const fileContent = event.target?.result;
-        const fileData: FileData = { 
+        const fileData: FileData = {
           name: file.name,
           type: file.type,
           size: file.size,
           content: fileContent,
         };
         sessionStorage.setItem("receita", JSON.stringify(fileData.content));
-        
+
         if (sessionStorage.getItem("receitaDepois")) {
           sessionStorage.removeItem("receitaDepois");
         }
-        
       };
       reader.readAsDataURL(file);
-      select("anexo Receita")
+      select("anexo Receita");
     }
-  }; 
+  };
 
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-2 md:gap-8 max-w-[487px] m-auto w-full">
         {selecaoCliente != "" && selecaoCliente != undefined
-          ? ( 
+          ? (
             <div class="text-center text-sm text-[#119184]">
               <p>
                 <span class="uppercase">Estamos quase lá!</span>
@@ -612,62 +632,99 @@ function ModalCategoryReceita(
         </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
-        {selecaoCliente == "anexo Receita" ? (
-          <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
-            <g clip-path="url(#clip0_150_13359)">
-            <path d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.625 4.38623V10.5112H22.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M11.375 17.5112H16.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 14.8862V20.1362" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_150_13359">
-            <rect width="28" height="28" fill="white" transform="translate(0 0.88623)"/>
-            </clipPath>
-            </defs>
-            </svg>
-            <span>ARQUIVO ANEXADO</span>
-          </div>
-        ):(
-          <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_144_4486)">
-                <path
-                  d="M15.0005 8.29722L7.19014 16.2369C6.91569 16.5196 6.7635 16.899 6.76646 17.293C6.76943 17.687 6.92731 18.064 7.20599 18.3426C7.48468 18.6212 7.86177 18.7789 8.25579 18.7817C8.64981 18.7845 9.0291 18.6321 9.3117 18.3575L18.622 8.91878C19.1847 8.35611 19.5008 7.59296 19.5008 6.79722C19.5008 6.00148 19.1847 5.23833 18.622 4.67565C18.0593 4.11298 17.2962 3.79688 16.5005 3.79688C15.7047 3.79688 14.9416 4.11298 14.3789 4.67565L5.06858 14.1153C4.23602 14.9616 3.77157 16.1025 3.7764 17.2896C3.78124 18.4767 4.25496 19.6139 5.09439 20.4533C5.93381 21.2927 7.07093 21.7664 8.25804 21.7713C9.44516 21.7761 10.5861 21.3117 11.4323 20.4791L19.1255 12.7972"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_144_4486">
-                  <rect
-                    width="24"
-                    height="24"
-                    fill="white"
-                    transform="translate(0 0.797363)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-            <span>ANEXAR ARQUIVO</span>
-          </div>
-        )}
-         
+          {selecaoCliente == "anexo Receita"
+            ? (
+              <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="29"
+                  viewBox="0 0 28 29"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_150_13359)">
+                    <path
+                      d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16.625 4.38623V10.5112H22.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M11.375 17.5112H16.625"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14 14.8862V20.1362"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_150_13359">
+                      <rect
+                        width="28"
+                        height="28"
+                        fill="white"
+                        transform="translate(0 0.88623)"
+                      />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>ARQUIVO ANEXADO</span>
+              </div>
+            )
+            : (
+              <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
+                <svg
+                  width="24"
+                  height="25"
+                  viewBox="0 0 24 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_144_4486)">
+                    <path
+                      d="M15.0005 8.29722L7.19014 16.2369C6.91569 16.5196 6.7635 16.899 6.76646 17.293C6.76943 17.687 6.92731 18.064 7.20599 18.3426C7.48468 18.6212 7.86177 18.7789 8.25579 18.7817C8.64981 18.7845 9.0291 18.6321 9.3117 18.3575L18.622 8.91878C19.1847 8.35611 19.5008 7.59296 19.5008 6.79722C19.5008 6.00148 19.1847 5.23833 18.622 4.67565C18.0593 4.11298 17.2962 3.79688 16.5005 3.79688C15.7047 3.79688 14.9416 4.11298 14.3789 4.67565L5.06858 14.1153C4.23602 14.9616 3.77157 16.1025 3.7764 17.2896C3.78124 18.4767 4.25496 19.6139 5.09439 20.4533C5.93381 21.2927 7.07093 21.7664 8.25804 21.7713C9.44516 21.7761 10.5861 21.3117 11.4323 20.4791L19.1255 12.7972"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_144_4486">
+                      <rect
+                        width="24"
+                        height="24"
+                        fill="white"
+                        transform="translate(0 0.797363)"
+                      />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>ANEXAR ARQUIVO</span>
+              </div>
+            )}
+
           <input
             type="file"
             onChange={handleFileChange}
             id="imgReceita"
             accept=".jpg,.jpeg,.png"
-            class="h-12 opacity-0 cursor-pointer" 
+            class="h-12 opacity-0 cursor-pointer"
           />
           <div class="text-sm mt-2 block">
             Apenas arquivos no formato PDF ou JPG.
@@ -685,7 +742,7 @@ function ModalCategoryReceita(
             <a href="" target="_blank" class="font-bold">
               Whatsapp{" "}
               <svg
-                class="inline" 
+                class="inline"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -704,25 +761,29 @@ function ModalCategoryReceita(
 
           <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-xs md:text-sm text-center">
             Mas, lembre-se de{" "}
-            <span class="font-bold text-xs md:text-base">incluir o número do pedido!</span>
+            <span class="font-bold text-xs md:text-base">
+              incluir o número do pedido!
+            </span>
           </div>
 
           <div class="flex gap-2 cursor-pointer items-center">
-            {selecaoCliente == "receita Depois" ? (
-              <input
-                type="checkbox"
-                id="envioreceita"
-                onClick={() => select("receita Depois")}
-                class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
-              />
-            ):(
-              <input
-                type="checkbox"
-                id="envioreceita"
-                onClick={() => select("receita Depois")}
-                class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
-              />
-            )}
+            {selecaoCliente == "receita Depois"
+              ? (
+                <input
+                  type="checkbox"
+                  id="envioreceita"
+                  onClick={() => select("receita Depois")}
+                  class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
+                />
+              )
+              : (
+                <input
+                  type="checkbox"
+                  id="envioreceita"
+                  onClick={() => select("receita Depois")}
+                  class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
+                />
+              )}
             <label for="envioreceita" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
@@ -739,7 +800,6 @@ function ModalCategoryRosto(
     select: (categoria: string) => void;
   },
 ) {
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event?.target?.files;
     if (files && files?.length > 0) {
@@ -747,7 +807,7 @@ function ModalCategoryRosto(
       const reader = new FileReader();
       reader.onload = (event) => {
         const fileContent = event.target?.result;
-        const fileData: FileData = { 
+        const fileData: FileData = {
           name: file.name,
           type: file.type,
           size: file.size,
@@ -759,7 +819,7 @@ function ModalCategoryRosto(
         }
       };
       reader.readAsDataURL(file);
-      select("anexo Rosto")
+      select("anexo Rosto");
     }
   };
 
@@ -807,58 +867,103 @@ function ModalCategoryRosto(
         </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
-        {selecaoCliente == "anexo Rosto" ? (
-          <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
-            <g clip-path="url(#clip0_150_13359)">
-            <path d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.625 4.38623V10.5112H22.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M11.375 17.5112H16.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 14.8862V20.1362" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_150_13359">
-            <rect width="28" height="28" fill="white" transform="translate(0 0.88623)"/>
-            </clipPath>
-            </defs>
-            </svg>
-            <span>ARQUIVO ANEXADO</span>
+          {selecaoCliente == "anexo Rosto"
+            ? (
+              <div class="btn uppercase font-semibold bg-[#8f8f8f] rounded-[200px] text-white hover:bg-[#8f8f8f] px-9 absolute top-0 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="29"
+                  viewBox="0 0 28 29"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_150_13359)">
+                    <path
+                      d="M21.875 25.3862H6.125C5.89294 25.3862 5.67038 25.294 5.50628 25.1299C5.34219 24.9659 5.25 24.7433 5.25 24.5112V5.26123C5.25 5.02917 5.34219 4.80661 5.50628 4.64251C5.67038 4.47842 5.89294 4.38623 6.125 4.38623H16.625L22.75 10.5112V24.5112C22.75 24.7433 22.6578 24.9659 22.4937 25.1299C22.3296 25.294 22.1071 25.3862 21.875 25.3862Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16.625 4.38623V10.5112H22.75"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M11.375 17.5112H16.625"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14 14.8862V20.1362"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_150_13359">
+                      <rect
+                        width="28"
+                        height="28"
+                        fill="white"
+                        transform="translate(0 0.88623)"
+                      />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>ARQUIVO ANEXADO</span>
+              </div>
+            )
+            : (
+              <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
+                <svg
+                  width="24"
+                  height="25"
+                  viewBox="0 0 24 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_144_4486)">
+                    <path
+                      d="M15.0005 8.29722L7.19014 16.2369C6.91569 16.5196 6.7635 16.899 6.76646 17.293C6.76943 17.687 6.92731 18.064 7.20599 18.3426C7.48468 18.6212 7.86177 18.7789 8.25579 18.7817C8.64981 18.7845 9.0291 18.6321 9.3117 18.3575L18.622 8.91878C19.1847 8.35611 19.5008 7.59296 19.5008 6.79722C19.5008 6.00148 19.1847 5.23833 18.622 4.67565C18.0593 4.11298 17.2962 3.79688 16.5005 3.79688C15.7047 3.79688 14.9416 4.11298 14.3789 4.67565L5.06858 14.1153C4.23602 14.9616 3.77157 16.1025 3.7764 17.2896C3.78124 18.4767 4.25496 19.6139 5.09439 20.4533C5.93381 21.2927 7.07093 21.7664 8.25804 21.7713C9.44516 21.7761 10.5861 21.3117 11.4323 20.4791L19.1255 12.7972"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_144_4486">
+                      <rect
+                        width="24"
+                        height="24"
+                        fill="white"
+                        transform="translate(0 0.797363)"
+                      />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>ANEXAR ARQUIVO</span>
+              </div>
+            )}
+
+          <input
+            type="file"
+            id="imgRosto"
+            accept=".jpg,.jpeg,.png"
+            class="h-12 opacity-0 cursor-pointer"
+            onChange={handleFileChange}
+          />
+          <div class="text-sm mt-2 block">
+            Apenas arquivos no formato PDF ou JPG.
           </div>
-        ):(
-          <div class="btn uppercase font-semibold bg-secondary rounded-[200px] text-white hover:bg-secondary px-9 absolute top-0 cursor-pointer">
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_144_4486)">
-                <path
-                  d="M15.0005 8.29722L7.19014 16.2369C6.91569 16.5196 6.7635 16.899 6.76646 17.293C6.76943 17.687 6.92731 18.064 7.20599 18.3426C7.48468 18.6212 7.86177 18.7789 8.25579 18.7817C8.64981 18.7845 9.0291 18.6321 9.3117 18.3575L18.622 8.91878C19.1847 8.35611 19.5008 7.59296 19.5008 6.79722C19.5008 6.00148 19.1847 5.23833 18.622 4.67565C18.0593 4.11298 17.2962 3.79688 16.5005 3.79688C15.7047 3.79688 14.9416 4.11298 14.3789 4.67565L5.06858 14.1153C4.23602 14.9616 3.77157 16.1025 3.7764 17.2896C3.78124 18.4767 4.25496 19.6139 5.09439 20.4533C5.93381 21.2927 7.07093 21.7664 8.25804 21.7713C9.44516 21.7761 10.5861 21.3117 11.4323 20.4791L19.1255 12.7972"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_144_4486">
-                  <rect
-                    width="24"
-                    height="24"
-                    fill="white"
-                    transform="translate(0 0.797363)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-            <span>ANEXAR ARQUIVO</span>
-          </div>
-        )}
-          
-          <input type="file" id="imgRosto" accept=".jpg,.jpeg,.png" class="h-12 opacity-0 cursor-pointer" onChange={handleFileChange} />
-          <div class="text-sm mt-2 block">Apenas arquivos no formato PDF ou JPG.</div>
         </div>
 
         <div class="flex flex-col gap-4">
@@ -891,26 +996,29 @@ function ModalCategoryRosto(
 
           <div class="p-2.5 rounded-2xl bg-[#DCF5F3] text-xs md:text-sm text-center">
             Mas, lembre-se de{" "}
-            <span class="font-bold text-xs md:text-base">incluir o número do pedido!</span>
+            <span class="font-bold text-xs md:text-base">
+              incluir o número do pedido!
+            </span>
           </div>
           <div class="flex gap-2 cursor-pointer items-center">
-             {selecaoCliente == "rosto Depois" ? (
-              <input
-                type="checkbox"
-                id="enviorosto"
-                onClick={() => select("rosto Depois")}
-                class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
-              />
-             ): (
-              <input
-                type="checkbox"
-                id="enviorosto"
-                onClick={() => select("rosto Depois")} 
-                class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
-              />
+            {selecaoCliente == "rosto Depois"
+              ? (
+                <input
+                  type="checkbox"
+                  id="enviorosto"
+                  onClick={() => select("rosto Depois")}
+                  class="appearance-none border border-black w-4 h-4 rounded-full relative border-[bg-secondary] after:content[''] after:bg-secondary after:absolute after:w-2 after:h-2 after:inset-0 after:m-auto after:rounded-full"
+                />
+              )
+              : (
+                <input
+                  type="checkbox"
+                  id="enviorosto"
+                  onClick={() => select("rosto Depois")}
+                  class="appearance-none border border-black w-4 h-4 rounded-full relative checked:border-[bg-secondary] checked:after:content[''] checked:after:bg-secondary checked:after:absolute checked:after:w-2 checked:after:h-2 checked:after:inset-0 checked:after:m-auto checked:after:rounded-full"
+                />
+              )}
 
-             )}
-            
             <label for="enviorosto" class="text-xs md:text-base">
               Entendi e aceito os termos para enviar mais tarde.
             </label>
@@ -922,10 +1030,11 @@ function ModalCategoryRosto(
 }
 
 function ReturnLente(
-  { lentes, selecaoCliente, quantitySelecaoCliente }: {
+  { lentes, selecaoCliente, quantitySelecaoCliente, priceProduct }: {
     lentes: Lente[];
     selecaoCliente: string[];
     quantitySelecaoCliente: string[];
+    priceProduct: number;
   },
 ) {
   if (Number(quantitySelecaoCliente) >= 3) {
@@ -937,6 +1046,8 @@ function ReturnLente(
       lente?.categorias[2] === selecaoCliente[2]
     );
 
+    const priceTotal = priceProduct + _lente[0].price;
+
     return (
       <>
         <div class="w-px h-auto bg-[#9C9C9C] hidden md:block"></div>
@@ -944,7 +1055,7 @@ function ReturnLente(
           <div class="text-white text-sm uppercase">Subtotal com lentes</div>
           <div class="text-[#119184] text-lg font-bold">
             {formatPrice(
-              _lente[0].price,
+              priceTotal,
               "BRL",
               "pt-BR",
             )}
@@ -1025,25 +1136,31 @@ export default function ModalLentes(
   };
 
   const adicionarSelecao = (selecao: string) => {
-    if(selecao == 'receita Depois'){
+    if (selecao == "receita Depois") {
       if (sessionStorage.getItem("receita")) {
         sessionStorage.removeItem("receita");
       }
-      sessionStorage.setItem("receitaDepois", "Receita será enviada mais tarde");
+      sessionStorage.setItem(
+        "receitaDepois",
+        "Receita será enviada mais tarde",
+      );
     }
 
-    if(selecao == 'rosto Depois'){
+    if (selecao == "rosto Depois") {
       if (sessionStorage.getItem("rosto")) {
         sessionStorage.removeItem("rosto");
       }
-      sessionStorage.setItem("rostoDepois", "Foto do rosto será enviada mais tarde");
+      sessionStorage.setItem(
+        "rostoDepois",
+        "Foto do rosto será enviada mais tarde",
+      );
     }
 
     const array = selecaoDoCliente.value;
     selecaoDoCliente.value = [...array.slice(0, activeTabIndex.value), selecao];
     proximo();
   };
- 
+
   const addToCartArmacao = () => {
     try {
       addItems({
@@ -1097,9 +1214,9 @@ export default function ModalLentes(
       )?.value;
       if (!propCategorias) return null;
       const categorias = propCategorias.split(", ");
-      const descricaoTratamento = p.isVariantOf?.additionalProperty.find((prop) =>
-        prop?.name === "Descrição - Tratamento (Modal)"
-      )?.value;
+      const descricaoTratamento = p.isVariantOf?.additionalProperty.find((
+        prop,
+      ) => prop?.name === "Descrição - Tratamento (Modal)")?.value;
       return {
         categorias,
         nome: p?.name || "",
@@ -1155,7 +1272,7 @@ export default function ModalLentes(
       new Set(_lentes.map((lente) => lente?.categorias[tabIndex])),
     );
   });
-  
+
   /*
   console.log({
     PRODUCTS: products,
@@ -1263,24 +1380,50 @@ export default function ModalLentes(
           <div class="overflow-y-auto mb-16 pb-12">
             <div class="flex flex-col gap-3 md:gap-0 max-w-screen-xl w-full m-auto">
               <div class="flex gap-2 justify-center md:justify-normal md:grid md:gap-1 md:grid-cols-5">
-                {activeTabIndex.value > 0 ? 
-                  (
-                    <div 
+                {activeTabIndex.value > 0
+                  ? (
+                    <div
                       class="text-xs flex flex-col justify-center items-center gap-1.5 font-bold md:hidden"
                       onClick={() => {
                         changeTab(activeTabIndex.value - 1);
                       }}
                     >
-                      <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="30.175" y="30" width="30" height="30" rx="15" transform="rotate(180 30.175 30)" fill="#0B0E0D"/>
-                        <path d="M15.0188 7.96876C11.1356 7.96876 7.98756 11.1168 7.98756 15C7.98756 18.8833 11.1356 22.0313 15.0188 22.0313C18.9021 22.0313 22.05 18.8833 22.05 15C22.05 11.1168 18.9021 7.96876 15.0188 7.96876Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
-                        <path d="M15.8977 17.6367L12.968 15L15.8977 12.3633" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <svg
+                        width="31"
+                        height="30"
+                        viewBox="0 0 31 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="30.175"
+                          y="30"
+                          width="30"
+                          height="30"
+                          rx="15"
+                          transform="rotate(180 30.175 30)"
+                          fill="#0B0E0D"
+                        />
+                        <path
+                          d="M15.0188 7.96876C11.1356 7.96876 7.98756 11.1168 7.98756 15C7.98756 18.8833 11.1356 22.0313 15.0188 22.0313C18.9021 22.0313 22.05 18.8833 22.05 15C22.05 11.1168 18.9021 7.96876 15.0188 7.96876Z"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                        />
+                        <path
+                          d="M15.8977 17.6367L12.968 15L15.8977 12.3633"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
                       </svg>
 
                       Anterior
                     </div>
-                  ) : ("")}
-                
+                  )
+                  : ("")}
+
                 <ModalTab
                   text="Tipo"
                   active={activeTab === "tipo"}
@@ -1289,7 +1432,7 @@ export default function ModalLentes(
                   }}
                   index={0}
                   selecaoClienteSize={selecaoDoCliente.value.length}
-                  selecaoCliente= {selecaoDoCliente.value}
+                  selecaoCliente={selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Tecnologia"
@@ -1299,7 +1442,7 @@ export default function ModalLentes(
                   }}
                   index={1}
                   selecaoClienteSize={selecaoDoCliente.value.length}
-                  selecaoCliente= {selecaoDoCliente.value}
+                  selecaoCliente={selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Tratamento"
@@ -1309,7 +1452,7 @@ export default function ModalLentes(
                   }}
                   index={2}
                   selecaoClienteSize={selecaoDoCliente.value.length}
-                  selecaoCliente= {selecaoDoCliente.value}
+                  selecaoCliente={selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Receita"
@@ -1319,7 +1462,7 @@ export default function ModalLentes(
                   }}
                   index={3}
                   selecaoClienteSize={selecaoDoCliente.value.length}
-                  selecaoCliente= {selecaoDoCliente.value}
+                  selecaoCliente={selecaoDoCliente.value}
                 />
                 <ModalTab
                   text="Seu Rosto"
@@ -1329,25 +1472,49 @@ export default function ModalLentes(
                   }}
                   index={4}
                   selecaoClienteSize={selecaoDoCliente.value.length}
-                  selecaoCliente= {selecaoDoCliente.value}
+                  selecaoCliente={selecaoDoCliente.value}
                 />
 
-                {activeTabIndex.value < 4 ? 
-                  (
-                    <div 
+                {activeTabIndex.value < 4
+                  ? (
+                    <div
                       class="text-xs flex flex-col justify-center items-center gap-1.5 font-bold md:hidden"
                       onClick={() => {
                         changeTab(activeTabIndex.value + 1);
                       }}
                     >
-                      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="30" height="30" rx="15" transform="matrix(1 8.74228e-08 8.74228e-08 -1 0 30)" fill="#0B0E0D"/>
-                        <path d="M15.1562 7.96876C19.0395 7.96876 22.1875 11.1168 22.1875 15C22.1875 18.8833 19.0395 22.0313 15.1562 22.0313C11.273 22.0313 8.125 18.8833 8.125 15C8.125 11.1168 11.273 7.96876 15.1562 7.96876Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
-                        <path d="M14.2773 17.6367L17.207 15L14.2773 12.3633" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          width="30"
+                          height="30"
+                          rx="15"
+                          transform="matrix(1 8.74228e-08 8.74228e-08 -1 0 30)"
+                          fill="#0B0E0D"
+                        />
+                        <path
+                          d="M15.1562 7.96876C19.0395 7.96876 22.1875 11.1168 22.1875 15C22.1875 18.8833 19.0395 22.0313 15.1562 22.0313C11.273 22.0313 8.125 18.8833 8.125 15C8.125 11.1168 11.273 7.96876 15.1562 7.96876Z"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                        />
+                        <path
+                          d="M14.2773 17.6367L17.207 15L14.2773 12.3633"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
                       </svg>
                       Próximo
                     </div>
-                  ) : ("")}
+                  )
+                  : ("")}
               </div>
               <div class="bg-white md:bg-[#F8F8F8] rounded-b-2xl pt-0 pb-16 md:pb-7 md:py-7 px-4 md:px-8">
                 {categories[activeTab]}
@@ -1359,7 +1526,7 @@ export default function ModalLentes(
             <div class="flex flex-col w-full m-auto max-w-screen-lg">
               <div class="flex justify-between flex-col sm:flex-row">
                 <div class="gap-6 hidden md:flex">
-                  <div> 
+                  <div>
                     <Image
                       class="group-disabled:border-base-300"
                       width={64}
@@ -1379,12 +1546,13 @@ export default function ModalLentes(
                         "pt-BR",
                       )}
                     </div>
-                  </div> 
+                  </div>
                 </div>
                 <ReturnLente
                   lentes={lentes?.value}
                   quantitySelecaoCliente={selecaoDoCliente.value.length}
                   selecaoCliente={selecaoDoCliente.value}
+                  priceProduct={produtoPagina?.offers?.lowPrice}
                 />
                 <div>
                   <AddCartModal
