@@ -71,7 +71,6 @@ const { displayModal } = useUI();
 
 const onCloseModal = () => {
   displayModal.value = false;
-  document.documentElement.style.overflow = "visible";
 };
 
 function ModalTab(

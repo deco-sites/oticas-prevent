@@ -6,7 +6,6 @@ export default function AddToCartButtonModalLente() {
 
   const onClick = () => {
     displayModal.value = true;
-    document.documentElement.style.overflow = "hidden";
   };
 
   return (
