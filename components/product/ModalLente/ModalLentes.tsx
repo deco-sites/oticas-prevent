@@ -630,6 +630,14 @@ function ModalCategoryReceita(
             Envie uma foto da sua <span class="font-bold">receita médica</span>
           </p>
         </div>
+        <div class="text-center md:hidden">
+          <Image
+            class="m-auto max-w-12"
+            src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/bcaef583-e4dd-4818-a643-8f816dea2837"
+            width={147}
+            height={148}
+          />
+        </div>
 
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
           {selecaoCliente == "anexo Receita"
@@ -726,8 +734,9 @@ function ModalCategoryReceita(
             accept=".jpg,.jpeg,.png"
             class="h-12 opacity-0 cursor-pointer"
           />
-          <div class="text-sm mt-2 block">
-            Apenas arquivos no formato PDF ou JPG.
+          <div class="text-sm mt-2 block text-center">
+            Tire ou selecione uma foto da sua receita médica, lembrando de
+            deixar visível o CRM do Médico e a data do exame.
           </div>
         </div>
 
@@ -866,6 +875,15 @@ function ModalCategoryRosto(
           </p>
         </div>
 
+        <div class="text-center md:hidden">
+          <Image
+            class="m-auto max-w-12"
+            src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/0166f30d-c8fd-4444-93e6-0af0755cbc89"
+            width={158}
+            height={202}
+          />
+        </div>
+
         <div class="flex flex-col justify-center items-center gap-3.5 relative">
           {selecaoCliente == "anexo Rosto"
             ? (
@@ -961,8 +979,11 @@ function ModalCategoryRosto(
             class="h-12 opacity-0 cursor-pointer"
             onChange={handleFileChange}
           />
-          <div class="text-sm mt-2 block">
-            Apenas arquivos no formato PDF ou JPG.
+          <div class="text-sm mt-2 block text-center">
+            Tire ou selecione uma foto do seu rosto.
+            <br></br>
+            Ligar a câmera em um ambiente bem iluminado e utilizar um cartão com
+            tarja magnética
           </div>
         </div>
 
