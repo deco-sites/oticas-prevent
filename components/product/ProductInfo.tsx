@@ -114,6 +114,7 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
 
   const { displayModal } = useUI();
 
+  //console.log(product.offers);
   return (
     <div class="flex flex-col px-2.5" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
@@ -148,7 +149,7 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
-        <ProductSelectorCustom product={product} />
+        <ProductSelector product={product} />
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
@@ -222,7 +223,7 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
           : <OutOfStock productID={productID} />}
       </div>
       {/* Shipping Simulation */}
-      <div class="mt-8">
+      <div class="mt-8 hidden">
         {platform === "vtex" && (
           <ShippingSimulation
             items={[
@@ -235,6 +236,22 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
           />
         )}
       </div>
+
+      {productName?.includes("Óculos de Grau") ||
+          productName?.includes("Óculos de grau")
+        ? (
+          <div class="mt-8 bg-gray-200 p-2.5">
+            <ul class="list-disc pl-5 text-sm">
+              <li>
+                <span class="text-orange-500">Fique tranquilo!</span>{" "}
+                Sua receita pode ser enviada logo após a finalização do produto
+                ou posteriormente via e-mail.
+              </li>
+            </ul>
+          </div>
+        )
+        : null}
+
       {/* Description card */}
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">

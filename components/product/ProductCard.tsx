@@ -274,8 +274,8 @@ function ProductCard({
           {/* SKU Selector */}
           {l?.onMouseOver?.showSkuSelector && (
             <ul class="flex justify-center items-center gap-2 w-full">
-              {/*skuSelector*/}
-              {skuSelectorImg}
+              {skuSelector}
+              {/*skuSelectorImg*/}
             </ul>
           )}
           {l?.onMouseOver?.showCta && cta}
@@ -297,8 +297,8 @@ function ProductCard({
                     align === "center" ? "justify-center" : "justify-start"
                   } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
                 >
-                  {/*skuSelector*/}
-                  {skuSelectorImg}
+                  {skuSelector}
+                  {/*skuSelectorImg*/}
                 </ul>
               )}
           </>

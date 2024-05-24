@@ -16,7 +16,7 @@ const colors: Record<string, string> = {
   "cinza": "bg-[#9a9a9a] ring-[#9a9a9a]",
   "cristal": "bg-gradient-to-r from-[#f0f1f3] to-[#dedfe4] ring-[#f0f1f3]",
   "dourado": "bg-gradient-to-r from-[#be8409] to-[#f5c654] ring-[#be8409]",
-  "marrom": "bg-[8b6244] ring-[#8b6244]",
+  "marrom": "bg-[#8b6244] ring-[#8b6244]",
   "nude": "bg-[#e4d6b1] ring-[#e4d6b1]",
   "prata": "bg-gradient-to-r from-[#dbdbdb] to-[#676c70] ring-[#dbdbdb]",
   "preto": "bg-[#000000] ring-[#000000]",
@@ -53,14 +53,15 @@ const variants = {
 };
 
 function Avatar({ content, variant = "default" }: Props) {
+  const cor = content.toLowerCase();
   return (
     <div class="avatar placeholder text-sm font-light h-6">
       <div
-        class={`${colors[content] ?? colors[variant]} ${variants[variant]}`}
+        class={`${colors[cor] ?? colors[variant]} ${variants[variant]}`}
         title={content}
       >
         <span class="uppercase ">
-          {colors[content] ? "" : content.substring(0, 2)}
+          {colors[cor] ? "" : content.substring(0, 2)}
         </span>
       </div>
     </div>
