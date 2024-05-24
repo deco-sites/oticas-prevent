@@ -281,6 +281,23 @@ function ModalCategoryTec(
 ) {
   const categoriasUnicas: Set<string> = new Set();
 
+  function buscarMenorValorPorCategoria(
+    lentes: string[] | Lente[],
+    categoria: string[],
+  ) {
+    let menorPreco = Infinity;
+    let lenteEncontrada = undefined;
+
+    lentes.forEach((lente) => {
+      if (lente.categorias.includes(categoria) && lente.price < menorPreco) {
+        menorPreco = lente.price;
+        lenteEncontrada = Number(lente.price);
+      }
+    });
+
+    return lenteEncontrada;
+  }
+
   return (
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-4">
@@ -326,7 +343,7 @@ function ModalCategoryTec(
 
             return (
               <div
-                className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
+                className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-between gap-3 ${
                   categoriaAtual === selecaoCliente
                     ? "border-4 border-[#119184]"
                     : "border border-[#D0D0D0]"
@@ -377,6 +394,14 @@ function ModalCategoryTec(
                     })}
                   </div>
                 ))}
+
+                <div class="font-bold text-center uppercase">
+                  A partir de {formatPrice(
+                    buscarMenorValorPorCategoria(lentes, categoriaAtual),
+                    "BRL",
+                    "pt-BR",
+                  )}
+                </div>
 
                 {categoriaAtual === selecaoCliente
                   ? (
@@ -474,7 +499,7 @@ function ModalCategoryTrat(
 
           return (
             <div
-              className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-center gap-3 ${
+              className={`p-5 bg-white rounded-2xl cursor-pointer flex flex-col justify-between gap-3 ${
                 lente?.categorias[selecaoIndex] === selecaoCliente
                   ? "border-4 border-[#119184]"
                   : "border border-[#D0D0D0]"
