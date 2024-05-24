@@ -1302,7 +1302,6 @@ export default function ModalLentes(
     INFORMACOES: informacoesModal,
   });
   */
-
   const categories: Record<Aba, JSX.Element> = {
     tipo: (
       <ModalCategoryType
