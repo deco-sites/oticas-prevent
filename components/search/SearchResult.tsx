@@ -45,12 +45,59 @@ function Result({
   startingPage = 0,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
+
   const perPage = pageInfo.recordPerPage || products.length;
 
   const id = useId();
 
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
+
+  const totalPages = Math.ceil(
+    (pageInfo?.records ?? 0) / (pageInfo?.recordPerPage ?? 1),
+  );
+  const currentPage = zeroIndexedOffsetPage + 1;
+
+  const pageLinks = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageLinks.push(
+      <li class="w-full">
+        <a
+          href={`?pg=${i}`}
+          key={i}
+          class="block text-center text-xs py-1 font-bold hover:text-[#B994FE]"
+        >
+          {i}
+        </a>
+      </li>,
+    );
+  }
+  const previousPages = [];
+  for (let i = Math.max(currentPage - 2, 1); i < currentPage; i++) {
+    previousPages.push(
+      <a
+        href={`?pg=${i}`}
+        class="inline-block text-sm text-secondary font-bold"
+      >
+        {i}
+      </a>,
+    );
+  }
+  const nextPages = [];
+  for (
+    let i = currentPage + 1;
+    i <= Math.min(currentPage + 2, totalPages);
+    i++
+  ) {
+    nextPages.push(
+      <a
+        href={`?pg=${i}`}
+        class="inline-block text-sm text-secondary font-bold"
+      >
+        {i}
+      </a>,
+    );
+  }
 
   return (
     <>
@@ -77,27 +124,76 @@ function Result({
           </div>
         </div>
 
-        <div class="flex justify-center my-4">
-          <div class="join">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost join-item">
-              Page {zeroIndexedOffsetPage + 1}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
-            </a>
+        <div class="flex justify-center items-end my-4 w-full mt-10">
+          <div class="join justify-center md:items-end flex-wrap">
+            <div class="flex items-center gap-5 mr-2 md:mx-6">
+              {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                (
+                  <a
+                    aria-label="previous page link hidden md:flex"
+                    rel="prev"
+                    href={pageInfo.previousPage}
+                    class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 hidden md:flex"
+                  >
+                    ANTERIOR
+                  </a>
+                )}
+
+              {previousPages}
+
+              <p
+                id="pagina-atual"
+                class="text-xs font-bold bg-secondary px-3 w-7 h-7 flex items-center justify-center text-white rounded-full"
+              >
+                {currentPage}
+              </p>
+
+              {nextPages}
+
+              <span class="mx-2 text-secondary">...</span>
+
+              <a
+                href={`?pg=${totalPages}`}
+                class="inline-block text-sm text-secondary font-bold"
+              >
+                {totalPages}
+              </a>
+
+              {currentPage < totalPages && (
+                <a
+                  aria-label="next page link"
+                  rel="next"
+                  href={pageInfo.nextPage}
+                  class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 hidden md:flex"
+                >
+                  PRÓXIMO
+                </a>
+              )}
+            </div>
+
+            <div class="w-full flex md:hidden justify-center mt-4">
+              {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                (
+                  <a
+                    aria-label="previous page link"
+                    rel="prev"
+                    href={pageInfo.previousPage}
+                    class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 w-[48%]"
+                  >
+                    ANTERIOR
+                  </a>
+                )}
+              {currentPage < totalPages && (
+                <a
+                  aria-label="next page link"
+                  rel="next"
+                  href={pageInfo.nextPage}
+                  class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 w-[48%]"
+                >
+                  PRÓXIMO
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
