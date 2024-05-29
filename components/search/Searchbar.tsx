@@ -64,7 +64,11 @@ function Searchbar({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { setQuery, payload, loading } = useSuggestions(loader);
   const { products = [], searches = [] } = payload.value ?? {};
-  const hasProducts = Boolean(products.length);
+  const filteredProducts = products.filter((product) =>
+    product.category !== "Lentes"
+  );
+
+  const hasProducts = Boolean(filteredProducts.length);
   const hasTerms = Boolean(searches.length);
 
   useEffect(() => {
@@ -162,7 +166,7 @@ function Searchbar({
               Produtos sugeridos
             </span>
             <Slider class="carousel">
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <Slider.Item
                   index={index}
                   class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"

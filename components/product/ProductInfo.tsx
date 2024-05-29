@@ -265,15 +265,19 @@ function ProductInfo({ page, layout, imagemMedidaArmacao }: Props) {
             </details>
           )}
 
-          <figure>
-            <Image
-              class="w-full"
-              src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/3141d4d8-1e8e-40e8-b822-f24ed93f0804"
-              width={616}
-              height={271}
-              loading="lazy"
-            />
-          </figure>
+          {productName?.includes("Óculos")
+            ? (
+              <figure>
+                <Image
+                  class="w-full"
+                  src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4488/3141d4d8-1e8e-40e8-b822-f24ed93f0804"
+                  width={616}
+                  height={271}
+                  loading="lazy"
+                />
+              </figure>
+            )
+            : null}
         </span>
       </div>
 

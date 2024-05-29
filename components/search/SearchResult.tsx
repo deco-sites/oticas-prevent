@@ -46,7 +46,15 @@ function Result({
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
 
-  const perPage = pageInfo.recordPerPage || products.length;
+  const filteredProducts = products.filter((product) =>
+    product.category !== "Lentes"
+  );
+
+  const perPage = pageInfo.recordPerPage || filteredProducts.length;
+
+  //console.log(perPage);
+  //console.log(page);
+  //console.log("teste page");
 
   const id = useId();
 
@@ -110,112 +118,124 @@ function Result({
         />
 
         <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 && (
+          {layout?.variant === "aside" && filters.length > 0 &&
+            filteredProducts.length > 0 && (
             <aside class="hidden sm:block w-min min-w-[250px]">
               <Filters filters={filters} />
             </aside>
           )}
           <div class="flex-grow" id={id}>
-            <ProductGallery
-              products={products}
-              offset={offset}
-              layout={{ card: cardLayout, columns: layout?.columns }}
-            />
+            {filteredProducts.length > 0
+              ? (
+                <ProductGallery
+                  products={products}
+                  offset={offset}
+                  layout={{ card: cardLayout, columns: layout?.columns }}
+                />
+              )
+              : (
+                <div class="text-center">
+                  Nenhum produto foi encontrado
+                </div>
+              )}
           </div>
         </div>
+        {filteredProducts.length > 0 && (
+          <div class="flex justify-center items-end my-4 w-full mt-10">
+            <div class="join justify-center md:items-end flex-wrap">
+              <div class="flex items-center gap-5 mr-2 md:mx-6">
+                {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                  (
+                    <a
+                      aria-label="previous page link hidden md:flex"
+                      rel="prev"
+                      href={pageInfo.previousPage}
+                      class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 hidden md:flex"
+                    >
+                      ANTERIOR
+                    </a>
+                  )}
 
-        <div class="flex justify-center items-end my-4 w-full mt-10">
-          <div class="join justify-center md:items-end flex-wrap">
-            <div class="flex items-center gap-5 mr-2 md:mx-6">
-              {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
-                (
+                {previousPages}
+
+                <p
+                  id="pagina-atual"
+                  class="text-xs font-bold bg-secondary px-3 w-7 h-7 flex items-center justify-center text-white rounded-full"
+                >
+                  {currentPage}
+                </p>
+
+                {nextPages}
+
+                <span class="mx-2 text-secondary">...</span>
+
+                <a
+                  href={`?pg=${totalPages}`}
+                  class="inline-block text-sm text-secondary font-bold"
+                >
+                  {totalPages}
+                </a>
+
+                {currentPage < totalPages && (
                   <a
-                    aria-label="previous page link hidden md:flex"
-                    rel="prev"
-                    href={pageInfo.previousPage}
+                    aria-label="next page link"
+                    rel="next"
+                    href={pageInfo.nextPage}
                     class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 hidden md:flex"
                   >
-                    ANTERIOR
+                    PRÓXIMO
                   </a>
                 )}
+              </div>
 
-              {previousPages}
-
-              <p
-                id="pagina-atual"
-                class="text-xs font-bold bg-secondary px-3 w-7 h-7 flex items-center justify-center text-white rounded-full"
-              >
-                {currentPage}
-              </p>
-
-              {nextPages}
-
-              <span class="mx-2 text-secondary">...</span>
-
-              <a
-                href={`?pg=${totalPages}`}
-                class="inline-block text-sm text-secondary font-bold"
-              >
-                {totalPages}
-              </a>
-
-              {currentPage < totalPages && (
-                <a
-                  aria-label="next page link"
-                  rel="next"
-                  href={pageInfo.nextPage}
-                  class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 hidden md:flex"
-                >
-                  PRÓXIMO
-                </a>
-              )}
-            </div>
-
-            <div class="w-full flex md:hidden justify-center mt-4">
-              {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
-                (
+              <div class="w-full flex md:hidden justify-center mt-4">
+                {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                  (
+                    <a
+                      aria-label="previous page link"
+                      rel="prev"
+                      href={pageInfo.previousPage}
+                      class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 w-[48%]"
+                    >
+                      ANTERIOR
+                    </a>
+                  )}
+                {currentPage < totalPages && (
                   <a
-                    aria-label="previous page link"
-                    rel="prev"
-                    href={pageInfo.previousPage}
+                    aria-label="next page link"
+                    rel="next"
+                    href={pageInfo.nextPage}
                     class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 w-[48%]"
                   >
-                    ANTERIOR
+                    PRÓXIMO
                   </a>
                 )}
-              {currentPage < totalPages && (
-                <a
-                  aria-label="next page link"
-                  rel="next"
-                  href={pageInfo.nextPage}
-                  class="text-xs btn py-1 min-height-unset text-white h-auto bg-secondary hover:bg-secondary rounded-full mx-2 w-[48%]"
-                >
-                  PRÓXIMO
-                </a>
-              )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item_list",
-          params: {
-            // TODO: get category name from search or cms setting
-            item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
-            item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
-            items: page.products?.map((product, index) =>
-              mapProductToAnalyticsItem({
-                ...(useOffer(product.offers)),
-                index: offset + index,
-                product,
-                breadcrumbList: page.breadcrumb,
-              })
-            ),
-          },
-        }}
-      />
+      {filteredProducts.length > 0 && (
+        <SendEventOnView
+          id={id}
+          event={{
+            name: "view_item_list",
+            params: {
+              // TODO: get category name from search or cms setting
+              item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
+              item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
+              items: page.products?.map((product, index) =>
+                mapProductToAnalyticsItem({
+                  ...(useOffer(product.offers)),
+                  index: offset + index,
+                  product,
+                  breadcrumbList: page.breadcrumb,
+                })
+              ),
+            },
+          }}
+        />
+      )}
     </>
   );
 }
