@@ -67,8 +67,8 @@ function CartItem(
       <Image
         {...image}
         src={image.src.replace("55-55", "255-255")}
-        style={{ aspectRatio: "108 / 150" }}
-        width={108}
+        style={{ aspectRatio: "150 / 150" }}
+        width={150}
         height={150}
         class="h-full object-contain"
       />
