@@ -95,7 +95,7 @@ export default function Lojas({
         />
       </div>
       <div class="flex content-center justify-center flex-wrap">
-        <div class="lg:w-1/2 py-4">
+        <div class="lg:w-1/2 py-4 px-4 md:px-0">
           {tituloloja && (
             <h2 class="font-semibold mb-4 text-xl lg:text-4xl text-[#5f9b9a] w-full">
               {tituloloja}
@@ -113,7 +113,14 @@ export default function Lojas({
             <p class="my-2 w-full">{horario}</p>
           )}
 
-          {mapa && <p class="btn" onClick={openModalMaps}>Ver no mapa</p>}
+          {mapa && (
+            <p
+              class="btn text-white bg-secondary hover:bg-secondary"
+              onClick={openModalMaps}
+            >
+              Ver no mapa
+            </p>
+          )}
           {displayMapsModal == true
             ? (
               <ModalCustom
