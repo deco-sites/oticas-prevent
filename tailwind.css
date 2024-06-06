@@ -28,6 +28,13 @@
   }
 }
 
+@media (max-width: 760px){
+  .mapa-container iframe{
+    width: 100%;
+  }
+}
+
+
 @layer components {
   .features {
     @apply flex items-center justify-center gap-6 flex-wrap;
