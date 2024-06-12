@@ -71,7 +71,7 @@ function Result({
     pageLinks.push(
       <li class="w-full">
         <a
-          href={`?pg=${i}`}
+          href={`?page=${i}`}
           key={i}
           class="block text-center text-xs py-1 font-bold hover:text-[#B994FE]"
         >
@@ -84,7 +84,7 @@ function Result({
   for (let i = Math.max(currentPage - 2, 1); i < currentPage; i++) {
     previousPages.push(
       <a
-        href={`?pg=${i}`}
+        href={`?page=${i}`}
         class="inline-block text-sm text-secondary font-bold"
       >
         {i}
@@ -99,7 +99,7 @@ function Result({
   ) {
     nextPages.push(
       <a
-        href={`?pg=${i}`}
+        href={`?page=${i}`}
         class="inline-block text-sm text-secondary font-bold"
       >
         {i}
@@ -144,7 +144,7 @@ function Result({
           <div class="flex justify-center items-end my-4 w-full mt-10">
             <div class="join justify-center md:items-end flex-wrap">
               <div class="flex items-center gap-5 mr-2 md:mx-6">
-                {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                {pageInfo.previousPage &&
                   (
                     <a
                       aria-label="previous page link hidden md:flex"
@@ -170,7 +170,7 @@ function Result({
                 <span class="mx-2 text-secondary">...</span>
 
                 <a
-                  href={`?pg=${totalPages}`}
+                  href={`?page=${totalPages}`}
                   class="inline-block text-sm text-secondary font-bold"
                 >
                   {totalPages}
@@ -189,7 +189,7 @@ function Result({
               </div>
 
               <div class="w-full flex md:hidden justify-center mt-4">
-                {pageInfo.previousPage !== "?pg=0" && pageInfo.previousPage &&
+                {pageInfo.previousPage &&
                   (
                     <a
                       aria-label="previous page link"
