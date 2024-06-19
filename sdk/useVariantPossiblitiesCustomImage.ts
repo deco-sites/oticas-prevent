@@ -44,9 +44,8 @@ export const useVariantPossiblitiesCustomImage = (
       // First row is always selectable
       const isSelectable = it === 0 ||
         specs.every((s) => s.name === name || selectedSpecs.has(hash(s)));
-      const isAvailable =
-        variant.offers?.offers[0].availability !==
-          "https://schema.org/OutOfStock";
+      const isAvailable = variant.offers?.offers[0].availability !==
+        "https://schema.org/OutOfStock";
 
       possibilities[name][value] = {
         url,

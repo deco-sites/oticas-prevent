@@ -54,55 +54,56 @@ export default function Section(
   return (
     <div id={id} class="w-full container py-8 flex flex-col gap-6 lg:py-10">
       <div class="grid grid-cols-[48px_1fr_48px] md:grid-cols-1 px-0 md:px-5 container">
-      <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5 gap-2 md:gap-4 lg:gap-8">
-        {banners.map((item, index) => (
-          <Slider.Item
-            index={index}
-            class={clx(
-              "carousel-item",
-              slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
-              slideMobile[layout?.numberOfSliders?.mobile ?? 1],
-            )}
-          >
-            <a
-              href={item?.href}
-              class="overflow-hidden relative"
+        <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5 gap-2 md:gap-4 lg:gap-8">
+          {banners.map((item, index) => (
+            <Slider.Item
+              index={index}
+              class={clx(
+                "carousel-item",
+                slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
+                slideMobile[layout?.numberOfSliders?.mobile ?? 1],
+              )}
             >
-              <Picture>
-                <Source
-                  src={item?.srcMobile}
-                />
-                <Source
-                  src={item?.srcDesktop ? item?.srcDesktop : item?.srcMobile}
-                />
-                <img
-                  class="card w-full"
-                  src={item?.srcMobile}
-                  alt={item?.alt}
-                />
-              </Picture>
-              <div class="text-lg text-base-content">
-                <span class="text-lg text-base-content">{item?.buttonText}</span>
-              </div>
-            </a>
-          </Slider.Item>
-        ))}
-      </Slider>
+              <a
+                href={item?.href}
+                class="overflow-hidden relative"
+              >
+                <Picture>
+                  <Source
+                    src={item?.srcMobile}
+                  />
+                  <Source
+                    src={item?.srcDesktop ? item?.srcDesktop : item?.srcMobile}
+                  />
+                  <img
+                    class="card w-full"
+                    src={item?.srcMobile}
+                    alt={item?.alt}
+                  />
+                </Picture>
+                <div class="text-lg text-base-content">
+                  <span class="text-lg text-base-content">
+                    {item?.buttonText}
+                  </span>
+                </div>
+              </a>
+            </Slider.Item>
+          ))}
+        </Slider>
 
-      <div class="relative block z-10 col-start-1 row-start-3 md:hidden">
-        <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-          <Icon size={24} id="ChevronLeft" strokeWidth={1} class="w-5" />
-        </Slider.PrevButton>
-      </div>
-      <div class="relative block z-10 col-start-3 row-start-3 md:hidden">
-        <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-          <Icon size={24} id="ChevronRight" strokeWidth={1} />
-        </Slider.NextButton>
-      </div>
+        <div class="relative block z-10 col-start-1 row-start-3 md:hidden">
+          <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
+            <Icon size={24} id="ChevronLeft" strokeWidth={1} class="w-5" />
+          </Slider.PrevButton>
+        </div>
+        <div class="relative block z-10 col-start-3 row-start-3 md:hidden">
+          <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
+            <Icon size={24} id="ChevronRight" strokeWidth={1} />
+          </Slider.NextButton>
+        </div>
 
-      <SliderJS rootId={id} />
+        <SliderJS rootId={id} />
       </div>
-      
     </div>
   );
 }

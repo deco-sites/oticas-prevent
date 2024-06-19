@@ -11,7 +11,9 @@ import Newsletter from "$store/islands/Newsletter.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Agencia from "$store/components/footer/Agencia.tsx";
+import ReclameAqui from "$store/components/footer/ReclameAqui.tsx";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import Copyright from "$store/components/footer/Copyright.tsx";
 
 export type Item = {
   label: string;
@@ -30,12 +32,26 @@ export interface SocialItem {
     | "Instagram"
     | "Linkedin"
     | "Tiktok"
-    | "Twitter";
+    | "Twitter"
+    | "InstagramNew"
+    | "TiktokNew"
+    | "FacebookNew"
+    | "LinkedinNew";
   link: string;
 }
 
 export interface PaymentItem {
-  label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";
+  label:
+    | "Diners"
+    | "Elo"
+    | "Mastercard"
+    | "Pix"
+    | "Visa"
+    | "EloNew"
+    | "DinnersNew"
+    | "MasterCardNew"
+    | "PixNew"
+    | "VisaNew";
 }
 
 export interface MobileApps {
@@ -81,6 +97,8 @@ export interface Layout {
     extraLinks?: boolean;
     backToTheTop?: boolean;
     agencia?: boolean;
+    reclameAqui?: boolean;
+    copyright?: boolean;
   };
 }
 
@@ -114,6 +132,15 @@ export interface Props {
     image: ImageWidget;
     link?: string;
     alt?: string;
+  };
+  reclameAqui?: {
+    title?: string;
+    image: ImageWidget;
+    link?: string;
+    alt?: string;
+  };
+  copyright?: {
+    text?: string;
   };
   layout?: Layout;
 }
@@ -179,6 +206,8 @@ function Footer({
   extraLinks = [],
   backToTheTop,
   agencia,
+  reclameAqui,
+  copyright,
   layout = {
     backgroundColor: "Primary",
     variation: "Variation 1",
@@ -193,6 +222,8 @@ function Footer({
       extraLinks: false,
       backToTheTop: false,
       agencia: false,
+      reclameAqui: false,
+      copyright: false,
     },
   },
 }: Props) {
@@ -216,21 +247,34 @@ function Footer({
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
+
   const _payments = layout?.hide?.paymentMethods
     ? <></>
     : <PaymentMethods content={payments} />;
+
   const _apps = layout?.hide?.mobileApps
     ? <></>
-    : <MobileApps content={mobileApps} />;
+    : <MobileApps apple={mobileApps?.apple} android={mobileApps?.android} />;
+
+  const _reclameAqui = layout?.hide?.reclameAqui
+    ? <></>
+    : <ReclameAqui reclameAqui={reclameAqui} />;
+
   const _region = layout?.hide?.regionOptions
     ? <></>
     : <RegionSelector content={regionOptions} />;
+
   const _links = layout?.hide?.extraLinks
     ? <></>
     : <ExtraLinks content={extraLinks} />;
+
   const _agencia = layout?.hide?.agencia
     ? <></>
     : <Agencia agencia={agencia} />;
+
+  const _copyright = layout?.hide?.copyright
+    ? <></>
+    : <Copyright copyright={copyright} />;
 
   return (
     <footer
@@ -250,6 +294,7 @@ function Footer({
             <Divider />
             <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
               {_payments}
+              {_reclameAqui}
               {_social}
               <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
                 {_apps}
@@ -260,6 +305,7 @@ function Footer({
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
               {_links}
+              {_copyright}
             </div>
           </div>
         )}
@@ -270,21 +316,22 @@ function Footer({
                 {_logo}
                 {_social}
                 {_payments}
+                {_reclameAqui}
                 {_apps}
                 {_region}
               </div>
-              <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
+              <div class="flex flex-col justify-between gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
                 {_newsletter}
                 {_sectionLinks}
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 text-white">
+            <div class="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-10 text-white">
               <div class="flex  gap-10">
                 <PoweredByDeco />
-
                 {_agencia}
               </div>
+              {_copyright}
               {_links}
             </div>
           </div>
@@ -297,6 +344,7 @@ function Footer({
                 {_newsletter}
                 <div class="flex flex-col gap-10">
                   {_payments}
+                  {_reclameAqui}
                   {_apps}
                 </div>
               </div>
@@ -311,6 +359,7 @@ function Footer({
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
+              {_copyright}
               {_links}
             </div>
           </div>
@@ -325,6 +374,7 @@ function Footer({
                 <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
                   <div class="lg:flex-auto">
                     {_payments}
+                    {_reclameAqui}
                   </div>
                   <div class="lg:flex-auto">
                     {_social}
@@ -352,6 +402,7 @@ function Footer({
               {_sectionLinks}
               <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
                 {_payments}
+                {_reclameAqui}
                 {_social}
                 {_apps}
               </div>
@@ -362,6 +413,7 @@ function Footer({
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
                 {_links}
                 {_region}
+                {_copyright}
               </div>
             </div>
           </div>
