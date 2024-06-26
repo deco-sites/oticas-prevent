@@ -20,7 +20,7 @@ export default function ReclameAqui({ reclameAqui }: Props) {
               {reclameAqui.title}
             </h3>
           )}
-          <div class="w-28 max-h-16 brightness-[100]">
+          <div class="w-28 max-h-16">
             <a
               class="link"
               href={reclameAqui?.link}
