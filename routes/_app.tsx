@@ -20,7 +20,7 @@ export default defineApp(async (_req, ctx) => {
       <Head>
         {/* Enable View Transitions API */}
         <meta name="view-transition" content="same-origin" />
-
+        <meta name="facebook-domain-verification" content="n195padhlywinonvixa0ca1922oo11" />
         {/* Tailwind v3 CSS file */}
         <link
           href={asset(`/styles.css?revision=${revision}`)}
